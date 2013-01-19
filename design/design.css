@@ -1,0 +1,875 @@
+/*----------------- body------------------ */
+  body {
+    font-family :  Arial,verdana, sans-serif;
+    background-color:#CCCCCC;
+    font-size:13px;
+  }
+
+/*----------------- alle Container------------------- */
+
+  #siteContainer{ /* Container komplette Seite */
+    position:absolute;    
+    margin:0px;
+    padding:5px;
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;    
+    width:90%; 
+    min-width:760px;
+  }
+  
+  #banner { /*Banner*/
+/*    float:left;*/
+    clear:both;
+    width:100%;
+    height:110px;
+        background:#FFFFFF;
+        text-align: left;
+  }
+
+  #cacertlogo {
+    float:left;
+  }
+
+  #cacertlogo a img {
+      border-width:0px;
+  }
+
+ #language{
+    float:right;
+    min-width:190px; 
+    width:25%;   
+    /*height:110px;*/
+    text-align: right;
+    /*margin-top:-92px;*/
+  }
+  
+  #menu_right{   /*Menue Leiste*/
+    position:static; 
+    float:right;
+    margin:0px;
+    padding:0px;
+    left:0px;
+    right:0px;
+    width:100%; 
+    min-width:760px;  
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    height:20px;
+    background:white;
+  }
+
+  #menue_left{   /*Menue Leiste*/
+    position:static; 
+    float:left;   
+    width:74.9%;    
+    min-width:569px;   
+    right:0px;
+    left:0px;
+    margin:0px;
+  }
+  
+  #menue_rigth{   /*Menue Leiste*/
+    position:static;    
+    float:right;
+    right:0px;
+    width:25%;
+    min-width:190px;
+    text-align:left;
+    border-left:1px solid #CCCCCC;
+  }
+  
+  #mainContainer{ /* Container um rechte box und main */
+    position:static; 
+    float:left;
+    margin:0px;
+    padding:0px;
+    min-height:700px;
+    width:100%;
+    min-width:760px;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    background:white;
+  }
+  
+  #main {    /*Hauptfenster*/
+    position:static; 
+        float:left;
+    left:0px;
+          right:0px;
+    margin:0px;
+    background:#FFFFFF;
+    width:74%;
+        min-width:569px;
+    min-height:700px;
+        line-height : 1.166;
+  }
+
+  #right_box {  /*rechte Box*/
+    position:static;
+    float:right;
+    text-align:center;
+    margin:0px;
+    padding:0px;
+    border-left:1px solid #CCCCCC;
+    width:25%; 
+    min-width:190px;    
+    //height:440px;
+    min-height:700px;
+    top:0px;
+    bottom:0px;
+    background:white;
+  }
+  
+  #inner_box_top {  /*rechte Box*/
+    position:static;
+    text-align: justify;
+    padding-top:5px;
+    padding-left:10%;
+    // text-align: center;
+    height:70%;
+    min-height:10em;  
+   }
+
+  #inner_box_bottom {  /*rechte Box*/
+    position:static;
+    height:30%;
+    text-align: justify;
+    // text-align: center;
+    padding-left:10%;
+    min-height:10em;  
+  }
+
+/*------------------------------------------------------*/
+
+/*------------ Menü Links------------------------------ */
+
+   #menue a {   /* Menü Punkt */
+    display:block;
+    float:left;
+    min-width:14em;
+    width:24.72%;
+    height:1.5em;
+    color:#334D55;  /* Schriftfarbe */
+        background:#F5F7F7;
+        border:1px solid #FFFFFF;
+        font:bold 12px verdana, sans-serif;
+        text-align:center;
+        text-decoration:none; 
+  }
+
+  #menue a.login { /* Menü Punkt */
+    display:block;
+    float:left;
+    min-width:10em;
+    width:47%;
+    height:1.5em;
+    color:#334D55;  /* Schriftfarbe */
+    padding:0px;
+          border:1px solid #FFFFFF;
+          font:bold 12px verdana, sans-serif;
+          text-align:center;
+          text-decoration:none;         
+  }
+  
+  #menue a.help { /* Menü Punkt */
+    display:block;
+    float:left;
+    left:20em;
+    margin:0px;
+    height:1.5em;
+    min-width:40px;
+    width:24%;
+    color:#334D55;  /* Schriftfarbe */
+    padding:0px;
+    border:1px solid #FFFFFF;
+    font:bold 12px verdana, sans-serif;
+    text-align:center;
+    text-decoration:none; 
+  }
+  
+  #menue a.info { /* Menü Punkt */
+    display:block;
+    float:left;
+    left:20em;
+    margin:0px;
+    height:1.5em;
+    min-width:30px;
+    width:24.5%;
+    color:#334D55;  /* Schriftfarbe */
+    padding:0px;
+    border:1px solid #FFFFFF;
+    font:bold 12px verdana, sans-serif;
+    text-align:center;
+    text-decoration:none; 
+  }
+
+  #menue a:hover {
+        border:1px solid #CCCCCC;
+        color:#005FA9; /* Schriftfarbe */
+        text-decoration:underline; 
+  }
+
+  a{
+        color:#334D55;  /* Schriftfarbe */
+  }
+  
+  a:focus, a:hover, a:active {
+        color:#005FA9; /* Schriftfarbe */
+        text-decoration:underline; 
+  }
+/*------------------------------------------------------*/
+
+
+/*------------ Schriften------------------------------- */
+
+  H1{
+    font-family : Arial, sans-serif;
+    color:#11568C;  /* Schriftfarbe */
+    font-size:12pt;
+    margin-left:10%;
+  }
+
+  h2{
+    margin-left:5%;
+    font-family : Arial, sans-serif;
+    color:#11568C;  /* Schriftfarbe */
+    font-size:12pt;
+  }
+  h2.maintitle {
+    text-align:center;
+  }
+  
+  H3{
+    margin-left:18%;
+    font-size:13px;
+  }
+  
+  H4{
+    font-size:13px;
+    text-align:center;
+  }
+  
+  H5{
+    margin-left:2%;
+    font-size:11px;
+    text-align:left;
+    color:#A90F00;
+    font-weight:bold;
+  } 
+  
+  H6{
+    text-align:left;
+    font-size:12px;
+    margin-left:20%;
+    color:#808080;
+  }
+  
+  .h7{
+    font-size:10px;
+    text-align:left;
+  } 
+  
+  .h8{
+   line-height:8;
+   font-size:13px;
+   text-align:center;
+   color:#A90F00;
+   font-weight:bold;
+   }
+   
+   .h9{
+   line-height:1.4;
+   font-size:13px;
+   text-align:center;
+   color:#A90F00;
+   font-weight:bold;
+   }
+   
+   .description {
+   font-size:13px;
+   text-align:center;
+   color:#000080;
+   font-weight:bold;
+   }
+/*------------------------------------------------------*/
+
+/*------------ Banner Bild-------------------------- */
+  .img{ /*Banner Bild */
+    margin-top:20px;
+    margin-left:10px;
+  }
+/*------------------------------------------------------*/
+
+/*------------ Menü Button des rechten Menüs-------------------------- */
+  .link_topic{  /*Links auf der Seite Topic.php*/
+    position:static;
+    padding-top:2%;
+    height:1.7em;
+    width:16.5em;
+        line-height: 2em;
+    color:#11568C;  /* Schriftfarbe */
+        background:#F5F7F7; 
+        border:1px solid #CCCCCC;
+        font:bold 12px verdana, sans-serif;
+        text-align:center;
+        text-decoration:none;   
+        display:block;
+  }
+  
+  .active { /*Links auf der Seite Topic.php*/
+   color:#00BE00; /* Schriftfarbe */
+  }
+/*------------------------------------------------------*/
+
+/*------------ Tabellen------------------------------- */
+  .table{
+    background-color: #F5F7F7;
+    border-collapse:collapse;
+        border: 1px solid #11568C;
+        border-top-color:#FFFFFF;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+  }
+
+  .table_standard       {  /*Tabelle auf der Seite Topic.php*/
+        margin-left:5%;
+        width:90%;
+        }
+        
+  .th{
+    background-color:#FFFFFF;
+    font-variant:small-caps;
+    font-weight:bold;
+    font-size:12px;
+    border: 1px solid #11568C;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+  }
+
+  th_number{
+    width:8%;
+  }
+  
+  .th_date{
+    width:50%;
+  }
+
+  .th_numOfQu{
+    width:15%;
+  }
+  
+  .th_topicName{
+    width:80%;
+  }
+  
+  .th_count{
+    width:10%;
+  }
+
+  .th_buttons{
+    width:1%;
+  }
+  
+  .th_question{
+    width:76%;
+  }
+  
+  .th_questiontype{
+    width:21%;
+  }
+  
+  .th_name {  /*Tabellenfelder auf der Seite Topic.php*/
+    width:60%;
+  } 
+
+  .th_pos{
+    width:1%;
+  }
+  
+  .th_topic{
+    width:23%;
+  }
+  
+  .td_inactive{
+    background-color:#CCCCCC;
+    border-top:1px #11568C solid; 
+    border-bottom:1px #11568C solid; 
+  }
+
+  .td_cDTable_text{
+    border-color:white;
+    height:1.5em;
+  }
+
+  .td_cDTable_field{
+    border-color:white;
+    height:1.5em;
+  }
+ 
+  .td_cDTable_point{
+    border-color:white;
+  }
+
+  td{
+    border: 1px solid #11568C;
+    border-top-color:#FFFFFF;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+  } 
+/*------------------------------------------------------*/
+
+  option{ /* Option Feld */
+    border:1px solid #FFFFFF;
+  }
+ 
+  .dropdown {
+    width:500px; 
+    border:1px solid #CCCCCC; 
+  }
+ 
+  .dropdown_site{
+    width:16.5em;
+  }
+ 
+  .check, .radio {
+    border:1px solid #CCCCCC;
+  }
+
+  .Button { 
+     margin-top:3%;
+     height:2em;
+     width: 16.5em;
+     line-height: 2em;
+     color:#11568C;  /* Schriftfarbe */
+     background:#F5F7F7;
+     border:1px solid #CCCCCC;
+     font:bold 12px verdana, sans-serif;
+     text-align:center;
+     text-decoration:none; 
+   }
+ 
+  .language_Button{
+    cursor: pointer; 
+    width:38%;
+    color:#334D55;  /* Schriftfarbe */
+    background:#F5F7F7;
+    border:1px solid #CCCCCC;
+    font:bold 12px verdana, sans-serif;
+    text-align:center;
+    text-decoration:none; 
+  }
+
+  hr {
+    display:none
+  }
+
+  .dropdown{
+    width:200 px;
+  }
+
+  .dropdown_language{
+    border:1px solid #CCCCCC;
+    font-size:10px;
+    width:62%;
+  }
+  
+  label.left {
+    float: left;
+    width: 17%;
+  }
+ 
+  label.left_point{
+    float: left;
+    text-align:center;
+    width:2%;
+  }
+
+  input.right {
+    float: left;
+    clear: both;
+    margin-left: 2%;
+    margin-right: 5%;
+  }
+  
+  .showStatus{
+   width:18%;
+   height:1.5em;
+   clear:both;
+   position:static;
+   float: left;
+   text-align:left;
+   margin-right: 2%;
+ }
+ 
+  .Button_right { 
+     margin-top:5%;
+     margin-left: 71%;
+     height:2em;
+     width: 15em;
+     line-height: 2em;
+     color:#11568C;  /* Schriftfarbe */
+     background:#F5F7F7;
+     border:1px solid #CCCCCC;
+     font:bold 12px verdana, sans-serif;
+     text-align:center;
+     text-decoration:none; 
+   }
+ 
+   .Button_left{
+     margin-top:3%;
+     margin-left: 14%;
+     height:2em;
+     width: 15em;
+     line-height: 2em;
+     color:#11568C;  /* Schriftfarbe */
+     background:#F5F7F7;
+     border:1px solid #CCCCCC;
+     font:bold 12px verdana, sans-serif;
+     text-align:center;
+     text-decoration:none; 
+   }
+ 
+   .Button_middle{
+     margin-top:3%;
+     margin-left: 37%;
+     height:2em;
+     width: 15em;
+     line-height: 2em;
+     color:#11568C;  /* Schriftfarbe */
+     background:#F5F7F7;
+     border:1px solid #CCCCCC;
+     font:bold 12px verdana, sans-serif;
+     text-align:center;
+     text-decoration:none; 
+   }
+  
+  .Button_info_right { 
+    margin-top:-2em;
+    float:left;
+    margin-left: 55%;
+    height:2em;
+    width: 15em;
+    line-height: 2em;
+    color:#11568C;  /* Schriftfarbe */
+    background:#F5F7F7;
+    border:1px solid #CCCCCC;
+    font:bold 12px verdana, sans-serif;
+    text-align:center;
+    text-decoration:none; 
+  }
+ 
+ .Button_info_left{
+  float:left;
+  margin-left: 9.5%;
+  height:2em;
+  width: 15em;
+  line-height: 2em;
+  color:#11568C;  /* Schriftfarbe */
+  background:#F5F7F7;
+  border:1px solid #CCCCCC;
+  font:bold 12px verdana, sans-serif;
+  text-align:center;
+  text-decoration:none; 
+ }
+
+  .dropdown_right {
+    /*margin-left:2%;*/
+    width:100%; 
+    border:1px solid #CCCCCC; 
+   }
+ 
+  label.del{
+    margin-left:2%;
+  }
+
+  .quiz_options_correct{
+    margin-left:2%;
+    background-color:#00BE00;
+  }
+  
+  .collect_question{
+   font-size:16px;
+   }
+ 
+  fieldset {
+    padding-bottom:2%;
+    padding-left:3%;
+    font-size:14px;
+    }
+
+  fieldset.info {
+    clear:both;
+    padding-bottom:2%;
+    padding-left:3%;
+    float:right;
+    font-size:10px;
+    text-align:left;
+    min-width:190px; 
+    width:116.5%;
+    margin-right:0.5%;
+    //margin-right:0.1%;
+    //margin-left:-11.5%;
+    //width:105%;
+  }
+ 
+  .left_answer_small{
+    position:static;
+    clear:both;
+    float: left;
+    width: 10%;
+    text-align:center;
+    margin-right: 2%;
+        border: 0px solid #11568C;
+}
+
+  .left_answer_big{
+    position:absolute;
+    clear:both;
+    float: left;
+    width: 73%;
+    margin-left:12.8%;
+  }
+
+ 
+  label.details{
+    clear:both;
+    margin-left:14%;
+    width:80%; 
+  }
+ 
+  #learnprogress{
+    margin-top:2%;
+    margin-left:10%;
+  }
+  
+  .marked{
+    background-color:#F5F7F7;
+  }
+  
+  legend{
+    margin-left:5%;
+    font-family : Arial, sans-serif;
+    color:#11568C;  /* Schriftfarbe */
+  }
+  
+  .certificateinfo{
+    width:60%;
+    padding-left:20%;
+    margin-top:10px;
+  }
+  
+  .userInfo{
+  width:80%;
+  margin-left:10%;
+  }
+  
+  .certificateDocu{
+    width:80%;
+    padding-left:10%;
+  }
+
+  .certificate_Infos{
+    min-width: 190px;
+    width:110%;
+    margin-left:-12.5%;
+  }
+  
+  .certificate_Infos_1{
+    clear:both;
+    float:right;
+    text-align:left;
+    font-size:10px;
+    width:78%;
+    margin-right:-1.8%;
+  }
+
+  label.left_info {
+    float: left;
+    width: 40%;
+    text-align:left;
+ }
+ 
+  .table_show_quiz{
+         width:100%;
+         float:left;
+         clear:both;
+  }
+  
+  .cDTable{
+    padding-left:2%;
+    width:100%;
+        float:left;
+        clear:both;
+        font: 9px;
+        color:#334D55;
+         border-color:white;
+  }
+  
+  .cDOptionTable{
+   width:100%;
+        float:left;
+        clear:both;
+        font: 9px;
+        color:#334D55;
+  }
+  
+  .question{
+    width:80%;
+    border: 0px solid #11568C;
+  }
+  
+  .answer{
+    width:80%;
+    border: 0px solid #11568C;
+  }
+  
+  .correct{
+   color:#008000;
+  }
+  
+  .false{
+   color:#800000;
+  }
+  
+  .choice{
+    width:3%;
+    border: 0px solid #11568C;
+  }
+  
+  .nr{
+    width:20%;
+    max-width:20%;
+    border: 0px solid #11568C;
+  }
+  
+  .symbol{
+    text-align:right;
+    width:3%;
+    border: 0px solid #11568C;
+  }
+  
+  .padding{
+    height:1.5em;
+  }
+  
+  .evaluate{
+    width:100%;
+    border: 0px solid #11568C;
+  }
+  
+  .table_show_answers{
+         width:100%;
+         float:left;
+         clear:both;
+         border: 0px solid #11568C;
+  }
+
+  .leftColumn{
+    min-width:20%;
+    border: 0px solid #11568C;
+  }
+  
+  .answers{
+    text-align:left;
+    width:80%;
+    max-width:80%;
+    border: 0px solid #11568C;
+  }
+  
+  .Button_row{
+    border: 0px solid #11568C;
+    text-align:right;
+    width:80;
+  }
+
+  .TextField{
+    width:100%;
+    height:1.4em;
+  }
+
+  .TextField_big{
+    width:100%;
+    height:3em;
+  }
+
+  .Button_rightColumn { 
+    height:2em;
+    width: 15em;
+    line-height: 2em;
+    color:#11568C;  /* Schriftfarbe */
+    background:#F5F7F7;
+    border:1px solid #CCCCCC;
+    font:bold 12px verdana, sans-serif;
+    text-align:center;
+    text-decoration:none; 
+   }
+   
+   .table_show_question{
+      width:100%;
+        float:left;
+        clear:both;
+        border: 0px solid #11568C;
+  }
+  
+  .text{
+    width:80%;
+         border: 0px solid #11568C;
+  }
+  
+  .name{
+    min-width:18%;
+    border: 0px solid #11568C;
+  }
+  
+  .left_point{
+    width:2%;
+    border: 0px solid #11568C;
+  }
+
+  .table_progress{
+        margin-left:20%;
+        width:60%;
+  }
+
+  .table_show_incorrect{
+        width:100%;
+        float:left;
+        clear:both;
+        overflow:scroll
+  }
+  
+  .nr_incorrect{
+    width:2%;
+    max-width:2%;
+    border: 0px solid #11568C;
+  }
+  
+  .question_incorrect{
+   border: 0px solid #11568C;
+    max-width:92%;
+    width:92%;
+  }
+  
+  .table_new_topic{
+    width:100%;
+        float:left;
+        clear:both;
+  }
+
+.centered {
+   text-align:center;
+}
+
+.linkimage {
+   border:0px;
+}
+
+.resulttable {
+   border:1px solid;
+}
+

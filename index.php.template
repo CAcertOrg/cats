@@ -1,0 +1,104 @@
+<?php
+// Session starten
+session_register(); 
+@session_start();
+
+  // For the moment we are using ISO8859, should be changed to UTF-8 in the future...
+  header('Content-Type: text/html; charset=iso-8859-1');
+
+ $_SESSION['_config']['filepath'] = "FILEPATHTOHERE"; // Filepath
+ 
+  // Dateien einbinden 
+  require_once($_SESSION['_config']['filepath']."classes/Topic.class.php");
+  require_once($_SESSION['_config']['filepath']."classes/Answer.class.php");
+  require_once($_SESSION['_config']['filepath']."classes/Question.class.php");
+  require_once($_SESSION['_config']['filepath']."classes/Quiz.class.php");
+  require_once($_SESSION['_config']['filepath']."classes/progress.class.php");
+  require_once($_SESSION['_config']['filepath']."includes/db_connect.inc");
+  require_once($_SESSION['_config']['filepath']."functions/translation.php");   
+  require_once($_SESSION['_config']['filepath']."functions/getButtons.php"); 
+  require_once($_SESSION['_config']['filepath']."functions/getContent.php"); 
+  require_once($_SESSION['_config']['filepath']."functions/getTitle.php");
+  
+  // Sessionvariable erstelln
+  if (isset($_SESSION['values']['site'])) unset ($_SESSION['values']['site']); 
+  if (isset($_GET['site'])) $_SESSION['values']['site']=strval($_GET['site']);
+  if (isset($_SESSION['values']['action'])) unset ($_SESSION['values']['action']); 
+  if (isset($_GET['action'])) $_SESSION['values']['action']=strval($_GET['action']);
+  if (isset($_SESSION['values']['interaction'])) unset ($_SESSION['values']['interaction']); 
+  if (isset($_GET['value']))$_SESSION['values']['interaction']=$_GET['value'];
+  
+  // Sprache setzen
+  if (isset($_POST['language']) && $_POST['language'] != 'none' &&
+      ctype_alpha($_POST['language'])) {
+    $_SESSION['profile']['language'] = strval($_POST['language']);
+  }
+  getlang();
+
+/*
+// XML declaration doesn't work in IE <= 6.0
+print('<?xml version="1.0" encoding="iso-8859-1"?>');
+*/
+$languagecode = empty($_SESSION['profile']['language']) ? "en" : strtolower($_SESSION['profile']['language']);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print($languagecode); ?>" lang="<?php print($languagecode); ?>">
+<head>
+<?php getTitle(); ?>
+<link rel="stylesheet" type="text/css" href="design/design.css" />
+<meta name="keywords" content="CATS, CAcert Assurer Testing System, CAcert, CAcert Automated Testing System, CAcert.org" />
+</head>
+<body>
+<?php  // Banner
+?><div id="banner">
+<div id="cacertlogo"><a href="https://www.CAcert.org/" target="_blank"><img class="img" src="images/cacert.png" alt="CAcert.org logo" /></a></div>
+<?php  // Sprachauswahl
+?><div id="language">
+ <form action="index.php" method="post">
+  <div>
+  <select size="1" class="dropdown_language" name="language">
+   <option value="none">choose language</option>
+   <option value="DE">DE</option>
+   <option value="EN">EN</option>
+   <option value="ES">ES</option>
+   <option value="FR">FR</option>
+   <option value="NL">NL</option>
+  </select><input name="submit" class="language_Button" type="submit" value="change" />
+  </div>
+ </form><?php
+// Statusfenster im Banner
+if (isset($_SESSION['profile']['loggedin']) && $_SESSION['profile']['loggedin']==1) : 
+?><fieldset class="certificate_Infos_1 info">
+   <legend><?php echo Index_01; ?></legend>
+   <p class="h7"><?php printf("%s : %s", accept_Login_05,
+                   $_SERVER['SSL_CLIENT_M_SERIAL']); ?></p>
+   <p class="h7"><?php printf("%s : %s", accept_Login_11,
+                   $_SERVER['SSL_CLIENT_V_END']); ?></p>
+  </fieldset><?php
+endif;
+?></div>
+</div><?php // Menüleiste
+?><div id="menue">
+<?php 
+if (isset($_SESSION['profile']['admin']) && $_SESSION['profile']['admin']==1 &&
+    isset($_SESSION['profile']['loggedin']) && $_SESSION['profile']['loggedin']==1) {
+  include ("menue_admin.php");
+} else {
+  include ("menue_user.php");
+}
+?></div><?php
+ // Container um rechte box und main
+?>
+<div id="mainContainer">
+<?php //rechtes Menü
+?><div id="right_box"><?php
+
+  // Buttons für das rechte Menü bereitstellen
+  getButtons ();
+?></div>
+<?php // Hauptbereich
+?><div id="main"><?php
+  getContent(); // Hauptteil ausgeben
+?></div>
+</div></body>
+</html>

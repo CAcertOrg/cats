@@ -1,0 +1,23 @@
+<?php
+
+$_SESSION['_config']['normalhostname'] = "HOSTNAME";
+$_SESSION['_config']['securehostname'] = "HOSTNAME";
+$_SESSION['_config']['folder'] = "/";
+
+// Variablen intialisieren für MySQL
+// Do not change variable names, other scripts are parsing this file for them!
+$host=":/var/run/mysqld/mysqld.sock";
+$user="DB-USER";
+$password="DB-PASSWORD";
+$database="DATABASE";
+
+// Stellt Verbindung mit DB her oder gibt Meldung aus
+  if (!mysql_connect($host,$user,$password)){
+    echo 'Keine Verbindung zur Datenbank möglich';
+    exit;
+  }
+
+  // Wählt DB aus oder gibt Meldung aus
+  mysql_select_db("$database") or die
+ ("Die Datenbank existiert nicht"); 
+?>

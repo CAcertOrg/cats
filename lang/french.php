@@ -1,0 +1,185 @@
+<?php
+define("accept_Login_01","Vous n'êtes pas enregistré. <br /> Veuillez vérifier votre information de certificat et confirmer l'enregistrement.");
+define("accept_Login_02","information certificat");
+define("accept_Login_03","Fourni à:");
+define("accept_Login_04","Nom commun(CN)");
+define("accept_Login_05","Numéro de série");
+define("accept_Login_06","addresse mèl  ");
+define("accept_Login_07","Publié par:");
+define("accept_Login_08","Organisation");
+define("accept_Login_09","Unité d'organisation");
+define("accept_Login_10","Publié le");
+define("accept_Login_11","Expire le");
+define("accept_Login_12","Inscription avec ce certificat ?<br /><br />".
+                         "Seulement le numéro de série du certificat sera stocké, mais si vous voulez demander un certificat imprimé après dépassement de l'essai, il devra être fourni au nom commun inclus dans le certificat !<br />".
+                         "Aucun certificat imprimé ne peut être délivré pour les certificats anonymes (Nom commun \"CAcert WoT User\").");
+define("accept_Login_13","validité:");
+define("Button_01","créez une nouvelle matière");
+define("Button_02","Retour à la table des matières");
+define("Button_03","Retour à la liste des questions");
+define("Button_04","Nouvelle question");
+define("Button_05","afficher sous forme de liste");
+define("Button_06","Afficher en ligne graphique");
+define("Button_07","afficher sous forme de graphique à barres");
+define("Button_08","La meilleure réponse");
+define("Button_09","La plus mauvaise réponse");
+define("Button_10","connexion réussi");
+define("Button_11","enregistrer");
+define("Button_12","enregistrer les modifications");
+define("Button_13","Editer les réponses");
+define("Button_14","ajouter la réponse");
+define("Button_15","supprimer la réponse");
+define("Button_16","évaluation du test");
+define("Button_17","Infos statistique");
+define("Button_18","Infos de l'utilisateur");
+define("Button_19","statistique du test");
+define("Check_Cert_01","Si vous souhaitez obtenir un document par l'intermédiaire du service postal ou par courrier électronique, votre nom doit être inclus dans le certificat!<br /> Vous pouvez aller de l'avant avec cette enregistrement, mais vous ne pouvez pas choisir les options <i>via le service postal </i> ou <i>par courrier électronique</i>.<br /> Pour avoir le choix, vous pouvez annuler cette inscription, et vous enregistrez avec un autre certificat, dans lequel votre nom est incluse.");
+define("certificateDocu_01","Si vous le souhaitez, nous pouvons créez un document attestant que vous avez a passé le test de l'assureur. Le document sera émis à votre nom comme indiqué dans votre certifcate numérique.");
+define("certificateDocu_02","Non, je ne souhaite pas ce document.");
+define("certificateDocu_03","Oui, envoyer svp le document pièce-joint au format pdf par l'intermédiaire de l'email  (Nous utiliserons l'adresse mèl fourni dans le certificat)");
+define("certificateDocu_04","Oui, envoyez-moi s'il vous plait le document par l'intermédiaire du service postal à l'adresse suivante :");
+define("certificateDocu_05","prénom");
+define("certificateDocu_06","nom");
+define("certificateDocu_07","rue");
+define("certificateDocu_08","code postal");
+define("certificateDocu_09","ville");
+define("certificateDocu_10","département");
+define("certificateDocu_11","pays");
+define("certificateDocu_12","tous les champs doive être rempli, si vous souhaitez recevoir via le service postal.");
+define("Class_Answer_01","détails des réponses");
+define("Class_Answer_02","réponses");
+define("Class_Answer_03","réponse");
+define("Class_Answer_04","au moins 2 réponses à donnée.");
+define("Class_Answer_05","réponses au moins une réponse doit être marqué comme 'correct' et au moins 2 doivent être fournis.");
+define("Class_Answer_06","Au moins une réponse doit être marqué comme 'correct'");
+define("Class_Answer_07","Dans un texte à trous réponses correctes et incorrectes doivent être différents");
+define("Class_Answer_08","Il a au moins une bonne et une mauvaise réponse");
+define("Class_Answer_09","vrai");
+define("Class_Answer_10","faux");
+define("Class_Progress_01","nombre de questions");
+define("Class_Progress_02","Trop de données stockée dans la base de données. "); // geh?rt zu Lernfortschritte_angezeigt
+define("Class_Progress_03","voir le dernier test");
+define("Class_Progress_04","progrès de l'apprentissage");
+define("Class_Progress_05","Plus aucune donnée disponible"); /*Bsp: Keine weiteren Infos zu : 5 Fragen */
+define("Class_Progress_06","Aucune information disponible pour:");
+define("Class_Progress_07","question(s)");
+define("Class_Progress_08","questions réponses incorrecte");
+define("Class_Question_01","Cliquez ici pour voir plus d'informations sur ce sujet");
+define("Class_Question_02","désactiver la question");
+define("Class_Question_03","Activer la question");
+define("Class_Question_04","supprimer la question");
+define("Class_Question_05","questions non disponibles dans la base de données");
+define("Class_Question_06","détails sur la question");
+define("Class_Quiz_01","il y a pas assez de questions à ce sujet. Veuillez choisir un autre sujet.");
+define("Class_Quiz_02","test");
+define("Class_Quiz_03","test d'évaluation");
+define("Class_Quiz_04","Votre score total est :");
+define("Class_Quiz_05","Minimum obligatoir pour validée le test est :");
+define("Class_Quiz_06","Vous avez atteint: "); /*Bsp: vous avez atteint 0 %  .... */
+define("Class_Quiz_07","et par conséquent vous avez");/* vous avez atteint 0 %  et donc vous n'avez pas réussit le test   */
+define("Class_Quiz_08","réussi le test.");
+define("Class_Quiz_09","n'à pas réussit le test.");/*Bsp:You have reached 0 %  and so you did not pass  */
+define("Class_Quiz_10_AnonymousCert", "Vous avez fait le test à l'aide d'un certificat anonyme, donc vous ne pouvez pas demander une version imprimé ou PDF certification de la réussite du test.<br />");
+define("Class_Quiz_11_RequestCert", "Demander un certificat");
+define("Class_Quiz_12_ExplainCert", "En raison de problèmes de confidentialité, nous ne recueillons pas vos données personnelles ici.<br /><br />".
+                                    "Pour demander une version papier ou PDF certification envoyer un mail à <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificat pour AssurerChallenge\">education@cacert.org</a> et nous dire si vous souhaitez en version papier ou en version PDF. Si vous désirez un certificat imprimé Veuillez inclure votre adresse postale.<br />".
+                                    "Le courrier peut être <a class=\"http\" href=\"education.txt\">chiffré</a> et <b>doit être signé par le certificat que vous avez utilisé pour effectuer le test</b> ainsi, nous pouvons vérifier qui avée réussi le test en vérifiant son numéro de série. ".
+                                    "Jetez un oeil à \"connecté en tant que:\" zone située dans le coin supérieur droit pour voir les infos sur le certificat que vous utilisez.<br />".
+                                    "<br /><em>Pour un certificat imprimé nous vous demandons pour un don d'environ 5 euros pour la diffusion à l'intérieur de l'Europe et 10 euros pour le courrier mondial pour couvrir les frais de manutention et d'expédition.<br />".
+                                    "Faire un don à l'aide de PayPal, cliquez sur le bouton ci-dessous, <a class=\"http\" href=\"https://www.cacert.org/index.php?id=13\">https://www.cacert.org/index.php?id=13</a> vous affiche toutes les méthodes pour faire un don à CAcert.</em><br />".
+                                    "<br />Nous sommes désolés pour le désagrément..<br />");
+define("Class_Quiz_13_Donate5", "5 Euros pour les frais d'expédition à l'intérieur de l'Europe");
+define("Class_Quiz_14_Donate10", "10 Euros pour les frais hors d'Europe");
+define("Class_Topic_01","nom");
+define("Class_Topic_02","no. des questions");
+define("Class_Topic_03","questions par test");
+define("Class_Topic_04","exigence");
+define("Class_Topic_05","Editer la rubrique");
+define("Class_Topic_06","Activer la rubrique");
+define("Class_Topic_07","Désactiver la rubrique : toutes les questions de cette rubrique vont être désactivées également.");
+define("Class_Topic_08","Supprimer la rubrique avec affectée toutes les questions et réponses");
+define("Class_Topic_09","pourcentage minimum doit être un nombre et ne doit pas être plus grand de 100");
+define("Class_Topic_10","rubrique existe déjà.");
+define("Class_Topic_11","Nombre de questions doit être un entier non négatif.");
+define("Class_Topic_12","exigence");
+define("Collect_Question_01","Cette question existe déjà. ");
+define("Collect_Question_02","Au moins un écart doit être défini. Les espaces sont créés par [ ]. La bonne réponse est à l'intérieur des crochets. Tous les supports doivent être fermés. ");
+define("Collect_Question_03","saisir la question");
+define("Function_getContent_01","Bienvenue");
+define("Function_getContent_02_Intro",'<div class="centered">Pour une courte introduction, veuillez jetez un oeil à <a href="http://wiki.cacert.org/wiki/AssurerChallenge" rel="external">le WiKi</a></div><br />');
+define("Function_getTopic_01","Afficher la progression");
+define("Function_getTopic_02","Afficher les statistiques");
+define("Function_getTopic_03","démarrer le test");
+define("Function_reallyDel_01","éffacement");
+define("Function_reallyDel_02","Vous êtes certain de que vouloir supprimer cette rubrique ?");
+define("Function_reallyDel_03","Si vous confirmez la suppréssion, toutes les questions et réponses seront supprimés également.");
+define("Function_reallyDel_04","Vous êtes certain de que vouloir supprimer cette question?");
+define("Get_Content_01","Inscription annulée !");
+define("Global_01","vous devez être connecté pour utiliser cette fonction");
+define("Global_02","précédent");
+define("Global_03","corriger");
+define("Global_04","date");
+define("Global_05","résultat");
+define("Global_06","ID");
+define("Global_07",'<h4 class="centered">Aucune donnée disponible</h4>');
+define("Global_08","question");
+define("Global_09","sujet");
+define("Global_10","pos");
+define("Global_11","fréquence");
+define("Global_12","type de question");
+define("Global_13","Oui");
+define("Global_14","Non");
+define("Global_15","répondu correctement dans %");
+define("Global_16","Vous n'êtes pas connecté à l'heure actuelle");
+define("Global_17","la connexion a échoué ! Un certificat de client CAcert valide est requis.");
+define("Global_18","Question ID");
+define("Global_19","Echec de connexion");
+define("Global_20","description");
+define("Index_01","Connecté en tant que :");
+define("Login_01","votre certificat pourrait ne pas être validé.");
+define("Login_02","votre certificat a été révoqué.");
+define("Login_03_No_Org_Certs","certificats d'organisation ne sont pas acceptés pour chats car ils ne peuvent pas être facilement remonter à un compte d'utilisateur.");
+define("Menue_01","Help");
+define("Menue_02","connexion");
+define("Menue_03","déconnexion");
+define("Menue_04","progrès");
+define("Menue_05","statistiques");
+define("Menue_06","Tests");
+define("Menue_07","Thèmes");
+define("Menue_08","EN");
+define("Menue_09","DE");
+define("Menue_10","FR"); /* ?? a rajouté certainement has certainly added */
+define("Statistic_01","meilleur résultat pour sujet: ");
+define("Statistic_02","pires résultats pour sujet: ");
+define("Statistic_03","questions dans cette rubrique:");
+define("Statistic_04","Réussi");
+define("Statistic_05","Échec");
+define("Statistic_06","Infos utilisateur");
+define("Statistic_07","Utilisateur");
+define("Statistic_08","utilisateurs enregistrés");
+define("Statistic_09","administrateurs");
+define("Statistic_10","certificats racine");
+define("Statistic_11","certificat de classe I utilisateur");
+define("Statistic_12","certificat de classe III utilisateur");
+define("Statistic_13","paramètres langue");
+define("Statistic_14","allemand");
+define("Statistic_15","anglais");
+define("Statistic_16","option de livraison ");
+define("Statistic_17","mail");
+define("Statistic_18","email");
+define("Statistic_19","aucun");
+define("Statistic_20","infos de test");
+define("Statistic_21","date");
+define("Statistic_22","tests  terminés");
+define("Statistic_23","tests réussis");
+define("Statistic_24","français"); /* ligne rajouté numérotation décaler a corrigé lors de l'intégration Line numbering added offset corrected during the integration */
+define("Title_01","CATS rubriques");
+define("Title_02","CATS collect questions");
+define("Title_03","CATS statistic");
+define("Title_04","CATS démarrer le Test");
+define("Title_05","CATS Découvrez les progrès");
+define("Title_06","CATS info certificat");
+define("Topic_01","Remarque : Vous ne pouvez pas déclarer les réponses comme correcte ici, qui ont été déclarées incorrect ci-dessous.");
+define("Topic_02","Présentation des rubriques");
+define("Topic_03","questions sur cette rubrique:");
+?>

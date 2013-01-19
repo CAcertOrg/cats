@@ -1,0 +1,148 @@
+This is the Change Log for PHPlot.
+The project home page is http://sourceforge.net/projects/phplot/
+-----------------------------------------------------------------------------
+
+===== Released as 5.0rc3 =====
+
+2006-11-13 (lbayuk)
+    * Fix for bug 1437912: x-axis label misalignment [bar charts]
+      The calculations were redone from scratch.
+      New control variable 'bar_extra_space', which works in addition to
+      'group_frac_width' to control how much extra space is around the bars.
+      Made bar widths match for 'stackedbars' and 1-bar-per-group 'bars'.
+
+      NOTE: This changes the appearance of charts. bars in 'stackedbars'
+      will now be thinner, and bars in 'bars' graphs will be thicker. I
+      saw no reason for them being different before.
+
+      This fix required fixing the positioning on the new bar data labels,
+      which was off before.  The bar data labels will now be centered.
+      Additional fixes to bar chart data labels:
+         For negative values, the label will center under the bar.
+         Fixed X-adjustment to account for shading.
+         Fixed to not suppress the data label if the value is 0.
+
+
+2006-11-10 (lbayuk)
+    * Fix for bug 1594457: DrawError text wrap and background fix
+      Do error image white background correctly, and word-wrap the text.
+
+    * Fix for bug 1594458: Suppress lines or points in 'linepoints' 
+      Don't draw X data labels twice for 'linepoints'.
+      Allow SetPointShapes value 'none' to suppress points, and allow
+      SetLineStyles value 'none' to suppress lines. This allows a 'linepoints'
+      graph to mix lines only, points only, and both on the same graph.
+
+
+2006-11-09 (lbayuk)
+    * Fixes for bug 1446523:
+      + Wrong variable name in deprecated SetAxisFontSize()
+      + Fails to properly handle error if SetDataValues() was never
+        called, or not called with a data array.
+
+    * Fix for bug 1117122: Pie Chart ignores SetPlotAreaPixels
+      Don't let DrawGraph recalculate the plot area for pie charts if the
+      user already set it with SetPlotAreaPixels.
+
+      NOTE: This fix may slightly change the appearance of some pie charts,
+      whether or not they use SetPlotAreaPixels.
+
+    * Fix for bug 1103992: Wrong max Y calculated for stackedbars
+      Changes FindDataLimits to calculate max Y correctly. It was counting
+      the first Y value in each record twice, which is always wrong but
+      only affected stackedbars because the Y values are summed.
+
+    * Fix for bug 1096199: Wrong error bar colors in DrawDotsError.
+      Rewrites DrawDotsError to make it work like DrawLinesError to
+      correctly increment the record and color indexes.
+      Also fixes uninitialized x_now_pixels.
+
+    * Fix for bug 1096197: No borders on unshaded Draw[Stacked]Bars
+      Unshaded Bars and StackedBars covered the border with the rectangle.
+      The fix is to draw the rectangle, then the border.
+
+      NOTE: This fix changes chart appearance. Bars and Stacked Bars
+      will now get a black border around each bar by default, if you
+      turn off the 3D-shading. If you want borderless, unshaded bars
+      you need to use SetDataBorderColors to set the data border colors
+      to be the same as the data colors.
+
+    * Fix for bug 1333164: Negative data values, if string variables, result
+      in unfilled bars. The problem was a string-to-string compare of a
+      negative number with the empty string x_axis_position. Fixed by
+      initializing x_axis_y_pixels to 0 if SetXAxisPosition was not used.
+
+
+2005-04-17 (afan)
+    * Fix for bug [ 1161072 ] SetInputFile warning, background overwrite
+
+    * Bug 1182672 fixed
+
+2005-04-15 (afan)
+    * fix for bug: [ 1182666 ] Y Auto-scale rounds in wrong direction
+
+    * Fix for bugs 1144644 TrueType font path problems and 1106328 TTF
+      path/filename inconsistency
+
+    * Fix Bug: [ 1117120 ] X Title sizing uses Y Title font height
+
+2005-04-13 (afan)
+    * Error in SetLineStyles() - does not accept an array argument
+
+
+2005-03-29 (afan)
+    * Small typo fixed in SetYDataLabelPos
+
+    * Update SetDataLabelPos: For past compatability we accept plotleft,
+      ...but pass it to SetTickLabelPos
+
+2005-03-26 (afan)
+    * Change to line 3802: data lables now work with multiple bars with *$idx
+
+2005-03-25 (afan)
+    * Added Function DrawDataLabels to put data labels in world coords,
+      added call from DrawBars and modified SetYDataLabelPos to flag
+      whether or not to call DrawDataLabels.
+
+2005-01-20 (migueldb)
+    * Many bugfixes reported and solved by L. J. Bayuk. Thanks!
+      + fixed bug #1096190
+      + FindDataLimits(): fixed bug #1096192
+      + CalcTranslation(): fixed bug #1101317
+      + DrawImageBorder(): fixed bug 1096200
+      + DrawXDataLabel(): fixed bug 1099879
+      + DrawDots(): fixed bug #1096194
+
+===== Released as 5.0rc2 =====
+
+2004-10-24 (migueldb)
+    * array_merge_php4(): added to cope with the bug introduced by
+        the change in array_merge() from PHP4 to PHP5 (I haven't verified this)
+    * Fixed some divisions by zero, thanks to an old bug report.
+
+2004-09-09 (migueldb)
+    * SetPointSize(): deprecated
+    * SetPointSizes(): added as replacement for SetPointSize().
+      Now able to set point sizes on a per line basis.
+    * SetPointShape(): deprecated.
+    * SetPointShapes(): added as replacement for SetPointShape().
+      Now able to set point shape on a per line basis.
+    * DrawDot(): now needs record number to decide which dot shape and
+      size to draw.
+    * CalcMargins(): dirty fix for x data label placing.
+    * tile_img(): fixed tile placement.
+
+2004-06-14 (migueldb)
+    * SetXTickLabelPos() and others: more on the bug reported by Jo Demol.
+    * Fixed bug reported by Jo Demol.
+
+2004-05-11 (migueldb)
+    * SetBgImage(): added.
+    * SetPlotAreaBgImage(): added.
+    * SetInputFile(): deprecated.
+    * DrawBackground(): now accepts images as backgrounds.
+    * DrawPlotAreaBackground(): now accepts images as backgrounds.
+    * tile_img(): internal method added.
+
+..........
+Editor's Note: For older changes to PHPlot, please see the CVS logs.

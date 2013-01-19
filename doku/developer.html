@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CATS Developer Documentation</title>
+
+</head>
+<body>
+<h1>CATS Developer Documentation</h1>
+
+<h2>Database Structure</h2>
+
+<p>See also the <a href="https://wiki.cacert.org/Software/CATS/Developer">WIKI page on CATS Developer documentation</a>.
+   It tends to be more up to date than this page, but is still incomplete.</p>
+
+<h3>ANSWERS</h3>
+
+<p>One record per possible answer</p>
+
+<ul>
+<li>a_id: Primary key, autoincrement, integer</li>
+<li>q_id: Question for this answer, foreign key to QUESTIONS</li>
+<li>answer: text to be shown</li>
+<li>correct: Flag, if the answer is correct (1) or not (0)</li>
+</ul>
+
+<h3>ANSWERS_INCORRECT</h3>
+
+<p>One record per incorrect answer in any test, for statistic purposes</p>
+
+<ul>
+<li>lp_id: Foreign key to LEARNPROGRESS, references the test in question</li>
+<li>a_id: Foreign key to ANSWERS, references the incorrect answer.</li>
+</ul>
+
+<h3>LEARNPROGRESS</h3>
+
+<p>LEARNPROGRESS stores one record for each test which is done. Primary key is "lp_id" (autoincrement), "user_id" and "root"
+refer to a USER record. Other columns:
+<ul>
+<li>date: Timestamp of the test</li>
+<li>t_id: Foreign key to TOPICS, describes the kind of test which has been made.</li>
+<li>number: The number of questions of this test. There is a known bug that this sometimes is 0</li>
+<li>correct: The number of correctly answered questions. Known bug: this is sometimes the negative number of questions</li>
+<li>wrong: The number of false answers in the test</li>
+<li>percentage: Redundant column, should not be used...</li>
+<li>uploaded: Flag describing whether the test result has already been uploaded into the main CAcert database. 1 for "uploaded", NULL for "not uploaded".</li>
+</ul>
+
+<h3>QUESTIONS</h3>
+
+<p>One record per possible question</p>
+
+<ul>
+<li>q_id: Primary key, autoincrement, integer</li>
+<li>qt_id: Foreign key to QUESTIONTYPE, type (single selection, multi-selection, ...) of the question</li>
+<li>t_id: Foreign key to TOPICS, references the type of test this question belongs to.</li>
+<li>question: Text of the question. As a convention the question starts with the id of the "master question" in square brackets
+   (or round ones for "fill in the blanks" questions) to help referencing questions for debugging purposes.</li>
+<li>active: Flag if the question can be used in tests, 1 for yes, 0 for no</li>
+<li>description: Flag if the question has a "detailed description" (1) or not (0)</li>
+<li>ref_q_id: References another question as "master question", currently this is the english version of the question for a translated question.</li>
+</ul>
+
+<h3>QUESTIONTYPE</h3>
+<b>For backward compatibility only, do not use anymore!</b>
+
+<p>This table lists the different kind of questions.</p>
+<p>Currently the following types are supported:</p>
+<ul>
+<li>single selection (1): exactly one of the answers is correct.</li>
+<li>multiple selection (2): one or more of the answers may be correct. As a convention the number of correct answers is given in the text of the question.</li>
+<li>true / false (3): Single selection with "true" and "false" as possible answers.</li>
+<li>"fill in the blanks" (4): A text with "blanks" (marked by angle brackets with the correct answer). All answers are shown in a listbox for every blank.</li>
+</ul>
+<p><b>Note</b>: The definition of this table does not support adding of new user interface languages very well,
+since every new language needs a new column in this table. The table should be retired soon and replaced with another one which supports
+adding UI languages without modification of database structure!</p>
+
+<h3>QUESTIONTYPE_V2</h3>
+
+<p>Replacement for QUESTIONTYPE-table, which supports adding new languages dynamically</p>
+<ul>
+  <li><b>qt_id</b>: Type of question. the following types are supported:
+  <ul>
+		<li>single selection (1): exactly one of the answers is correct.</li>
+		<li>multiple selection (2): one or more of the answers may be correct. As a convention the number of correct answers is given in the text of the question.</li>
+		<li>true / false (3): Single selection with "true" and "false" as possible answers.</li>
+		<li>"fill in the blanks" (4): A text with "blanks" (marked by angle brackets with the correct answer). All answers are shown in a listbox for every blank.</li>
+  </ul>
+  </li>
+  <li><b>lang</b>: Language of the text, as ISO 639-1 code, see <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">Wikipedia on ISO 639-1</a>.</li>
+  <li><b>qt_desc</b>: Translated description of the question type</li>
+</ul>
+
+<h3>QUESTION_DESCRIPTION</h3>
+
+<p>An optional explanation for a question, which is shown during the debriefing of a test.<p>
+<ul>
+<li>q_id: Primary key, foreign key to QUESTIONS.</li>
+<li>description: Text to be shown</li>
+</ul>
+
+<h3>STATISTICS</h3>
+
+<p>One (or no) record per question, for statistic purposes</p>
+
+<ul>
+<li>stat_id: Primary key, autoincrement, integer</li>
+<li>q_id: Foreign key to QUESTIONS, Unique???</li>
+<li>count: Number of times the question has been asked during a test</li>
+</ul>
+
+<h3>TOPIC_TYPE</h3>
+
+<p>Type of a test, "what is the test good for". Corresponds to CATS_TYPE on the main database, but matching is done by text.</p>
+<p>One TOPIC_TYPE entry usually referenced by one or more (one for each supported language) entries in TOPICS</p>
+
+<ul>
+<li>type_id: Primary key, autoincrement, integer</li>
+<li>text: The textual name of the test type. This matches CATS_TYPE.type_text in the main database.</li>
+</ul>
+
+<h3>TOPICS</h3>
+
+<p>One record per kind of test. Corresponds to CATS_VARIANT on the main database</p>
+
+<ul>
+<li>t_id: Primary key, autoincrement, integer</li>
+<li>topic: The textual name of the test. This matches CATS_VARIANT.test_text on the main database</li>
+<li>active: 1 if the test can be done by users</li>
+<li>numOfQu: Number of questions per test</li>
+<li>lang: Language of the test, currently only used for information</li>
+<li>type_id: References TOPIC_TYPE.type_id
+</ul>
+
+<h3>USER</h3>
+
+<p>Table USER contains the user records for the test. A user record is related to one certificate which is used for login.</p>
+<p>The primary key is the combination of "user_id" (serial number of the certificate) and "root" (issuer of the certificate).
+The only other column currently in use is "admin" which is set to 1 for users with administrative privileges.</p>
+
+<h3>USER_ADDRESS</h3>
+
+<p>Currently not used</p>
+
+</body>
+</html>
