@@ -13,6 +13,8 @@ include ("functions/acceptLogin.php");
 
         if (isset($_SERVER["SSL_CLIENT_S_DN_O"])) {
           echo '<h5 class="centered"><br />'.Login_03_No_Org_Certs.'</h5>';
+        } elseif(!isset($_SERVER["SSL_CLIENT_S_DN_Email"]) {
+          echo '<h5 class="centered"><br />'.Login_04_No_Server_Certs.'</h5>';
         } elseif( $user_id ){
         $sql="SELECT * FROM user where `user_id`='".$user_id."' and `root`='".$root."' ";
         $query = mysql_query($sql);

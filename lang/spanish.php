@@ -139,6 +139,8 @@ define("Index_01","registrado como :");
 define("Login_01","Su certificado no pudo ser validado.");
 define("Login_02","Su certificado ha sido revocado.");
 define("Login_03_No_Org_Certs","No se aceptan certificados de organizaciones para los CATS ya que no pueden ser relacionados fácilmente con una cuenta de usuario.");
+define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
+                                  "Server certificates cannot be used to log in to CATS since they do not identify a person.");
 define("Menue_01","Ayuda");
 define("Menue_02","Iniciar sesión");
 define("Menue_03","Salir");

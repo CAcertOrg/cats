@@ -139,6 +139,8 @@ define("Index_01","eingeloggt als :");
 define("Login_01","Ihr Zertifikat konnte nicht überprüft werden");
 define("Login_02","Ihr Zertifikat wurde wiederrufen");
 define("Login_03_No_Org_Certs","Organisations-Zertifikate werden von CATS nicht akzeptiert, da sie sich nicht einfach einem Benutzerkonto zuordnen lassen.");
+define("Login_04_No_Server_Certs","Ihr Zertifikat enthält kein Email-Feld, vermutlich handelt es sich um ein Server-Zertifikat.<br />".
+                                  "Server-Zertifikate werden von CATS nicht akzeptiert, da sie keine Person identifizieren.");
 define("Menue_01","Hilfe");
 define("Menue_02","Login");
 define("Menue_03","Logout");

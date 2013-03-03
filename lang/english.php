@@ -139,6 +139,8 @@ define("Index_01","logged in as :");
 define("Login_01","Your certificate could not be validated.");
 define("Login_02","Your certificate has been revoked.");
 define("Login_03_No_Org_Certs","Organisation certificates are not accepted for CATS since they cannot be easily traced to a user account.");
+define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
+                                  "Server certificates cannot be used to log in to CATS since they do not identify a person.");
 define("Menue_01","Help");
 define("Menue_02","Login");
 define("Menue_03","Logout");
