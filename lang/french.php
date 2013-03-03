@@ -143,6 +143,8 @@ define("Index_01","Connecté en tant que :");
 define("Login_01","votre certificat pourrait ne pas être validé.");
 define("Login_02","votre certificat a été révoqué.");
 define("Login_03_No_Org_Certs","certificats d'organisation ne sont pas acceptés pour chats car ils ne peuvent pas être facilement remonter à un compte d'utilisateur.");
+define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
+                                  "Server certificates cannot be used to log in to CATS since they do not identify a person.");
 define("Menue_01","Help");
 define("Menue_02","connexion");
 define("Menue_03","déconnexion");
