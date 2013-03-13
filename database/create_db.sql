@@ -178,6 +178,31 @@ CREATE TABLE `user_address` (
   PRIMARY KEY  (`user_id`,`root`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Table structure for table `questiontype_v2`
+--
+
+DROP TABLE IF EXISTS `questiontype_v2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `questiontype_v2` (
+  `qt_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Fragetypenschlssel',
+  `lang` varchar(5) COLLATE latin1_general_ci NOT NULL DEFAULT '' COMMENT 'Sprache',
+  `qt_desc` varchar(25) COLLATE latin1_general_ci NOT NULL DEFAULT '' COMMENT 'Fragetyp',
+  PRIMARY KEY (`qt_id`,`lang`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Fragetypen';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questiontype_v2`
+--
+
+LOCK TABLES `questiontype_v2` WRITE;
+/*!40000 ALTER TABLE `questiontype_v2` DISABLE KEYS */;
+INSERT INTO `questiontype_v2` VALUES (1,'DE','Einfachauswahl'),(2,'DE','Mehrfachauswahl'),(3,'DE','Richtig / Falsch'),(4,'DE','Lückentext'),(1,'EN','single selection'),(2,'EN','multiple choice'),(3,'EN','true / false'),(4,'EN','fill in the blanks'),(1,'FR','single selection'),(2,'FR','multiple choice'),(3,'FR','true / false'),(4,'FR','fill in the blanks'),(1,'ES','single selection'),(2,'ES','multiple choice'),(3,'ES','true / false'),(4,'ES','fill in the blanks');
+/*!40000 ALTER TABLE `questiontype_v2` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
