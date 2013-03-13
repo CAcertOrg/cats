@@ -19,6 +19,8 @@ Setup
 
 - Get CATS from github into your webserver's document directory (or any subdir):
   git clone git@github.com:CAcertOrg/cats.git
+- Checkout your favourite branch, for example "git checkout release" for the installed productive version
+  or "git checkout testserver" to get a mirror of the testserver.
 
 - Connect to your MySQL server with an administrative user and create a database for CATS:
   CREATE DATABASE cats_db;
