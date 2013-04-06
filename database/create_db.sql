@@ -1,8 +1,8 @@
 -- MySQL dump 10.11
 --
--- Host: localhost    Database: cats_cats
+-- Host: localhost    Database: cats_db
 -- ------------------------------------------------------
--- Server version 5.0.45-community
+-- Server version	5.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `answers` (
   `answer` text collate latin1_general_ci NOT NULL,
   `correct` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`a_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=944 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1529 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
 --
@@ -56,6 +56,7 @@ CREATE TABLE `learnprogress` (
   `correct` int(11) NOT NULL default '0' COMMENT 'Richtige Fragen',
   `wrong` int(11) NOT NULL default '0' COMMENT 'Anzahl der falschen Antworten',
   `percentage` decimal(5,0) default NULL,
+  `uploaded` tinyint(1) default NULL,
   PRIMARY KEY  (`lp_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=178 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -83,8 +84,11 @@ CREATE TABLE `questions` (
   `question` text collate latin1_general_ci NOT NULL COMMENT 'Frage',
   `active` enum('1','0') collate latin1_general_ci NOT NULL default '0',
   `description` enum('1','0') collate latin1_general_ci NOT NULL default '0',
+  `ref_q_id` int(11) default NULL,
+  `translationstatus` int(11) default NULL,
   PRIMARY KEY  (`q_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=158 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Fragen';
+) ENGINE=MyISAM AUTO_INCREMENT=245 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Fragen';
+
 
 --
 -- Table structure for table `questiontype`
@@ -118,7 +122,7 @@ CREATE TABLE `statistics` (
   `q_id` int(11) NOT NULL default '0' COMMENT 'Frage Id',
   `count` int(11) NOT NULL default '0' COMMENT 'ZÃ¤hlen von Antworten',
   PRIMARY KEY  (`stat_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=121 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
 --
@@ -132,9 +136,11 @@ CREATE TABLE `topics` (
   `active` tinyint(1) NOT NULL default '0',
   `numOfQu` tinyint(4) NOT NULL default '0',
   `percentage` tinyint(4) NOT NULL default '0',
+  `lang` varchar(42) collate latin1_general_ci default NULL,
   PRIMARY KEY  (`t_id`),
   UNIQUE KEY `topic` (`topic`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Themen';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Themen';
+
 
 --
 -- Table structure for table `user`
@@ -172,6 +178,31 @@ CREATE TABLE `user_address` (
   PRIMARY KEY  (`user_id`,`root`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Table structure for table `questiontype_v2`
+--
+
+DROP TABLE IF EXISTS `questiontype_v2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `questiontype_v2` (
+  `qt_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Fragetypenschlssel',
+  `lang` varchar(5) COLLATE latin1_general_ci NOT NULL DEFAULT '' COMMENT 'Sprache',
+  `qt_desc` varchar(25) COLLATE latin1_general_ci NOT NULL DEFAULT '' COMMENT 'Fragetyp',
+  PRIMARY KEY (`qt_id`,`lang`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Fragetypen';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questiontype_v2`
+--
+
+LOCK TABLES `questiontype_v2` WRITE;
+/*!40000 ALTER TABLE `questiontype_v2` DISABLE KEYS */;
+INSERT INTO `questiontype_v2` VALUES (1,'DE','Einfachauswahl'),(2,'DE','Mehrfachauswahl'),(3,'DE','Richtig / Falsch'),(4,'DE','Lückentext'),(1,'EN','single selection'),(2,'EN','multiple choice'),(3,'EN','true / false'),(4,'EN','fill in the blanks'),(1,'FR','single selection'),(2,'FR','multiple choice'),(3,'FR','true / false'),(4,'FR','fill in the blanks'),(1,'ES','single selection'),(2,'ES','multiple choice'),(3,'ES','true / false'),(4,'ES','fill in the blanks');
+/*!40000 ALTER TABLE `questiontype_v2` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -182,4 +213,4 @@ CREATE TABLE `user_address` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2008-01-04 23:53:19
+-- Dump completed on 2013-03-13 22:24:08
