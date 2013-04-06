@@ -4,11 +4,15 @@ Installation procedure for CATS
 Prerequesites
 -------------
 
-- Apache 2.2.4 ist installed and configured to run with HTTPS. The CAcert roots should
+Note that the version numbers are for the versions used to verify the procedure.
+There are no explicit version dependencies, so the software should run with newer versions,
+and will probably also support (moderately) older ones.
+
+- Apache 2.2.4 is installed and configured to run with HTTPS. The CAcert roots should
   be trusted. 
 - PHP 5.2.4
 - MySQL (Version 5.0) is installed and running
-- git is installed and has access to github.com
+- git (version 1.5.2.4) is installed and has access to github.com
 - You have a browser with a valid CAcert client certificate installed
 - You may want to set up your own CAcert testsystem like described in https://wiki.cacert.org/Software
   to play around with certificates more freely
@@ -28,10 +32,14 @@ Setup
   CREATE USER cats-user IDENTIFIED BY '<a password>';
 - Grant the necessary user rights. These are a bit more than the absolute minimum:
   GRANT DELETE, INSERT, SELECT, UPDATE ON cats_db.* TO cats_user;
-- Change the database to the newly created cats_db:
+- Change the database context to the newly created cats_db:
   USE cats_db;
 - Execute the scripts from the database subdirectory to create the database structure.
-  First execute create_db.sql, then all update*.sql in numerical order
+- Check the current version of the database:
+  SELECT MAX(version) FROM schema_version;
+- Execute all update*.sql in numerical order which have a number bigger than the current
+  schema version. If the select statement returns an error (ERROR 1146 (42S02): Table 
+  'cats_db.schema_version' doesn't exist) execute all of them.
 
 - Change to cats directory, copy index.php.template to index.php
 - Edit index.php, replace the string "FILEPATHTOHERE" with the absolute path of the 
