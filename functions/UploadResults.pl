@@ -8,6 +8,7 @@ my $KeyFile = "key_200808.pem";
 my $CAfile = "CAcert_roots.pem";
 my $TargetHost="secure.cacert.org";
 my $TargetScript="cats/cats_import.php";
+my $ConnectInc="/home/cats/public_html/includes/db_connect.inc";
 
 sub url_encode($)
 {
@@ -32,6 +33,9 @@ sub SendRecord($$$$$$)
   my $BytesRead;
   my $Result;
   my $ContentLength;
+  my $DoClose;
+  my $HTTPResult;
+  my $HTTPTextResult;
  
   $data = "serial=".url_encode($serial)."&root=".url_encode($root)."&type=".url_encode($type).
           "&variant=".url_encode($variant)."&date=".url_encode($date)."&OK=Anfrage+abschicken\r\n";
@@ -47,6 +51,7 @@ sub SendRecord($$$$$$)
   
   $IsChunked = 0;
   $ContentLength = 0;
+  $DoClose = 0;
   do {
     $CurLine = Net::SSLeay::ssl_read_CRLF($ssl);
     die_if_ssl_error("ssl_read_CRLF");
@@ -54,14 +59,21 @@ sub SendRecord($$$$$$)
       print "ssl_read_CRLF returns nothing\n";
       return "BREAK";
     }
+    if (CurLine =~ /^HTTP\/[0-9.]+ (\d+) (.+)/i) {
+      $HTTPResult = $1;
+      $HTTPTextResult = $2;
+    }
     if ($CurLine =~ /^Transfer-Encoding: chunked/i) {
       $IsChunked = 1;
     }
     if ($CurLine =~ /^Content-Type: text\/html;/i) {
       $IsHTML = 1;
     }
-    if ($CurLine =~ /^Content-Length:\s*(\d)\r\n/) {
+    if ($CurLine =~ /^Content-Length:\s*(\d+)/) {
       $ContentLength = $1;
+    }
+    if ($CurLine =~ /^Connection: close/) {
+      $DoClose = 1;
     }
   } while($CurLine ne "\r\n");
   
@@ -87,10 +99,10 @@ sub SendRecord($$$$$$)
     $Result = Net::SSLeay::read($ssl, $ContentLength);
   }
   
-  return $Result;
+  return ($DoClose, $Result);
 }
 
-# parse sb_connect.inc for database parameters
+# parse db_connect.inc for database parameters
 sub connect_with_php_inc($)
 {
   my ($phpFile) = @_;
@@ -134,6 +146,9 @@ while($CurArg < scalar(@ARGV)) {
   } elsif ($ARGV[$CurArg] eq "--Host") {
     $CurArg++;
     $TargetHost = $ARGV[$CurArg];
+  } elsif ($ARGV[$CurArg] eq "--ConnectInc") {
+    $CurArg++;
+    $ConnectInc = $ARGV[$CurArg];
   }
   $CurArg++;
 }
@@ -142,7 +157,7 @@ Net::SSLeay::load_error_strings();
 Net::SSLeay::SSLeay_add_ssl_algorithms();
 Net::SSLeay::randomize();
 
-my $dbh = connect_with_php_inc("/home/cats/public_html/includes/db_connect.inc");
+my $dbh = connect_with_php_inc($ConnectInc);
 my $sth;
 my $RecID;
 my $serial;
@@ -151,7 +166,9 @@ my $type;
 my $variant;
 my $date;
 my @OKIDs;
+my @FailIDs;
 my $RowNum;
+my $DoClose;
 
 $dbh->do("SET time_zone='+00:00'");
 $sth = $dbh->prepare("SELECT `lp`.`lp_id`, `lp`.`user_id`, `lp`.`root`, `tt`.`text`, `t`.`topic`, `lp`.`date` ".
@@ -168,52 +185,72 @@ $port = 443;
 $dest_ip = gethostbyname ($TargetHost);
 $dest_serv_params  = sockaddr_in($port, $dest_ip);
 
-socket  (S, &AF_INET, &SOCK_STREAM, 0)  or die "socket: $!";
-connect (S, $dest_serv_params)          or die "connect: $!";
-select  (S); $| = 1; select (STDOUT);   # Eliminate STDIO buffering
-
-# The network connection is now open, lets fire up SSL    
-
-$ctx = Net::SSLeay::CTX_new() or die_now("Failed to create SSL_CTX $!");
-Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL)
- and die_if_ssl_error("ssl ctx set options");
-
-# Set accepted CAs
-Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
-
-# Add client vertificate
-Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
-
-$ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
-Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
-$res = Net::SSLeay::connect($ssl) and die_if_ssl_error("ssl connect");
-#print "Cipher `" . Net::SSLeay::get_cipher($ssl) . "'\n";
-# Still to do here. CRL/OCSP-Checking
-
 # Exchange data
 $RowNum = 0;
+$DoClose = 1;
 do {
   ($RecID, $serial, $root, $type, $variant, $date) = $sth->fetchrow_array();
 
+  if ($DoClose) {
+		socket  (S, &AF_INET, &SOCK_STREAM, 0)  or die "socket: $!";
+		connect (S, $dest_serv_params)          or die "connect: $!";
+		select  (S); $| = 1; select (STDOUT);   # Eliminate STDIO buffering
+
+		# The network connection is now open, lets fire up SSL    
+
+		$ctx = Net::SSLeay::CTX_new() or die_now("Failed to create SSL_CTX $!");
+		Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL)
+		 and die_if_ssl_error("ssl ctx set options");
+
+		# Set accepted CAs
+		Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
+
+		# Add client vertificate
+		Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
+
+		$ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
+		Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
+		$res = Net::SSLeay::connect($ssl) and die_if_ssl_error("ssl connect");
+		#print "Cipher `" . Net::SSLeay::get_cipher($ssl) . "'\n";
+		# Still to do here. CRL/OCSP-Checking
+  }
+  
   if ($RecID) {
-    $got = SendRecord($ssl, $serial, $root, $type, $variant, $date);
+    ($DoClose, $got) = SendRecord($ssl, $serial, $root, $type, $variant, $date);
   
     $got =~ s/\s+//g;
     print localtime(time).": $root/$serial, $type/$variant: $got\n";
     if (($got =~ /^OK/i) || ($got =~ /^Duplicate/i)) {
       push(@OKIDs, $RecID);
+    } elsif ($got =~ /^Cannot find cert/i) {
+      push(@FailIDs, $RecID);
     }
     $RowNum += 1;
+
+	  if ($DoClose) {
+	    # Server requested closing of connection
+			CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
+			Net::SSLeay::free ($ssl);               # Tear down connection
+			Net::SSLeay::CTX_free ($ctx);
+			close S;
+	  }
   }
 } while($RecID && ($got ne "BREAK"));
 
-CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
-Net::SSLeay::free ($ssl);               # Tear down connection
-Net::SSLeay::CTX_free ($ctx);
-close S;
+if (!$DoClose) {
+	CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
+	Net::SSLeay::free ($ssl);               # Tear down connection
+	Net::SSLeay::CTX_free ($ctx);
+	close S;
+}
 
 $sth = $dbh->prepare("UPDATE `learnprogress` SET `uploaded`=1 WHERE `lp_id`=?");
 foreach $RecID (@OKIDs) {
+  $sth->execute($RecID);  
+}
+
+$sth = $dbh->prepare("UPDATE `learnprogress` SET `uploaded`=2 WHERE `lp_id`=?");
+foreach $RecID (@FailIDs) {
   $sth->execute($RecID);  
 }
 
