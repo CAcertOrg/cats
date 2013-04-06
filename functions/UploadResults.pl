@@ -192,27 +192,27 @@ do {
   ($RecID, $serial, $root, $type, $variant, $date) = $sth->fetchrow_array();
 
   if ($DoClose) {
-		socket  (S, &AF_INET, &SOCK_STREAM, 0)  or die "socket: $!";
-		connect (S, $dest_serv_params)          or die "connect: $!";
-		select  (S); $| = 1; select (STDOUT);   # Eliminate STDIO buffering
+    socket  (S, &AF_INET, &SOCK_STREAM, 0)  or die "socket: $!";
+    connect (S, $dest_serv_params)          or die "connect: $!";
+    select  (S); $| = 1; select (STDOUT);   # Eliminate STDIO buffering
 
-		# The network connection is now open, lets fire up SSL    
+    # The network connection is now open, lets fire up SSL    
 
-		$ctx = Net::SSLeay::CTX_new() or die_now("Failed to create SSL_CTX $!");
-		Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL)
-		 and die_if_ssl_error("ssl ctx set options");
+    $ctx = Net::SSLeay::CTX_new() or die_now("Failed to create SSL_CTX $!");
+    Net::SSLeay::CTX_set_options($ctx, &Net::SSLeay::OP_ALL)
+     and die_if_ssl_error("ssl ctx set options");
 
-		# Set accepted CAs
-		Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
+    # Set accepted CAs
+    Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
 
-		# Add client vertificate
-		Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
+    # Add client vertificate
+    Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
 
-		$ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
-		Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
-		$res = Net::SSLeay::connect($ssl) and die_if_ssl_error("ssl connect");
-		#print "Cipher `" . Net::SSLeay::get_cipher($ssl) . "'\n";
-		# Still to do here. CRL/OCSP-Checking
+    $ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
+    Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
+    $res = Net::SSLeay::connect($ssl) and die_if_ssl_error("ssl connect");
+    #print "Cipher `" . Net::SSLeay::get_cipher($ssl) . "'\n";
+    # Still to do here. CRL/OCSP-Checking
   }
   
   if ($RecID) {
@@ -227,21 +227,21 @@ do {
     }
     $RowNum += 1;
 
-	  if ($DoClose) {
-	    # Server requested closing of connection
-			CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
-			Net::SSLeay::free ($ssl);               # Tear down connection
-			Net::SSLeay::CTX_free ($ctx);
-			close S;
-	  }
+    if ($DoClose) {
+      # Server requested closing of connection
+      CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
+      Net::SSLeay::free ($ssl);               # Tear down connection
+      Net::SSLeay::CTX_free ($ctx);
+      close S;
+    }
   }
 } while($RecID && ($got ne "BREAK"));
 
 if (!$DoClose) {
-	CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
-	Net::SSLeay::free ($ssl);               # Tear down connection
-	Net::SSLeay::CTX_free ($ctx);
-	close S;
+  CORE::shutdown S, 1;  # Half close --> No more output, sends EOF to server
+  Net::SSLeay::free ($ssl);               # Tear down connection
+  Net::SSLeay::CTX_free ($ctx);
+  close S;
 }
 
 $sth = $dbh->prepare("UPDATE `learnprogress` SET `uploaded`=1 WHERE `lp_id`=?");
