@@ -218,7 +218,7 @@ do {
   if ($RecID) {
     ($DoClose, $got) = SendRecord($ssl, $serial, $root, $type, $variant, $date);
   
-    $got =~ s/\s+//g;
+    $got =~ s/\s+$//g;
     print localtime(time).": $root/$serial, $type/$variant: $got\n";
     if (($got =~ /^OK/i) || ($got =~ /^Duplicate/i)) {
       push(@OKIDs, $RecID);
