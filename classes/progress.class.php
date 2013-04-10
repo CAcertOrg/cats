@@ -75,15 +75,16 @@ class Progress
           echo"<td class='td'>$i</td>";
           echo"<td class='td'>".$this->progress[$i]['date']."</td>";
           echo"<td class='td'>".$this->progress[$i]['number']."</td>";
-          echo"<td class='td'>".getPassedImage($this->progress[$i]['passed'])."</td>";
           if ($this->progress[$i]['number'] > 0) {
             $percent=($this->progress[$i]['correct']/$this->progress[$i]['number'])*100;
           } else {
             $percent = 0;
           }
           $percent=round ($percent,2);
-          echo"<td class='td'>$percent %</td>";
-          echo"<td class='td'> <a href='?site=progress&amp;action=showIncorrectAnswers&amp;lp_id=".$this->progress[$i]['lp_id']."&amp;t_id=$this->topic'><img src='images/details.png' class='linkimage' alt='' /></a></td>";
+          echo "<td class='td'>$percent %</td>";
+          echo "<td class='td'>".$this->getPassedImage($this->progress[$i]['passed'])."</td>";
+          echo "<td class='td'> <a href='?site=progress&amp;action=showIncorrectAnswers&amp;lp_id=";
+          echo $this->progress[$i]['lp_id']."&amp;t_id=$this->topic'><img src='images/details.png' class='linkimage' alt='' /></a></td>";
           echo "</tr>";
         }
         $this->totalresult['count']=$i;
