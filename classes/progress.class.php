@@ -25,16 +25,16 @@ class Progress
     }
 
     function setLp_id($lp_id){
-    $this->lp_id=$lp_id;
+      $this->lp_id=$lp_id;
     }
 
-     function setData($value){
-       $this->progress=$value;
-     }
+    function setData($value){
+      $this->progress=$value;
+    }
     function getProgress(){
-     $sql= "SELECT lp_id,date,number,correct,wrong, passed FROM learnprogress WHERE user_id='".mysql_real_escape_string($_SESSION['profile']['id'])."' AND t_id='".mysql_real_escape_string($this->topic)."' AND root ='".mysql_real_escape_string($_SESSION['profile']['root'])."' order by date";
-     $query = mysql_query($sql)  OR die(mysql_error());
-     $i=1;
+      $sql= "SELECT lp_id,date,number,correct,wrong, passed FROM learnprogress WHERE user_id='".mysql_real_escape_string($_SESSION['profile']['id'])."' AND t_id='".mysql_real_escape_string($this->topic)."' AND root ='".mysql_real_escape_string($_SESSION['profile']['root'])."' order by date";
+      $query = mysql_query($sql)  OR die(mysql_error());
+      $i=1;
       while($progress =mysql_fetch_array($query,MYSQL_BOTH  )){
         $this->progress[$i]['lp_id']=$progress['lp_id'];
         $this->progress[$i]['date']=$progress['date'];
@@ -48,8 +48,8 @@ class Progress
     }
 
     function count() {
-     $numberOfTests=count($this->progress);
-     return $numberOfTests;
+      $numberOfTests=count($this->progress);
+      return $numberOfTests;
     }
 
     function showTable() {
@@ -67,55 +67,55 @@ class Progress
         echo"<td class='th th_count'>".Statistic_04."</td>";
         echo "<td class='th th_buttons'></td>";
         echo"</tr>";
-          for ($i=1;$i<=count($this->progress);$i++){
+        for ($i=1;$i<=count($this->progress);$i++){
           if (1==$this->progress[$i]['passed']) {
             $this->totalresult['passed']+=1;
           }
           echo "<tr>";
-           echo"<td class='td'>$i</td>";
-           echo"<td class='td'>".$this->progress[$i]['date']."</td>";
-           echo"<td class='td'>".$this->progress[$i]['number']."</td>";
-           echo"<td class='td'>".getPassedImage($this->progress[$i]['passed'])."</td>";
-           if ($this->progress[$i]['number'] > 0) {
-             $percent=($this->progress[$i]['correct']/$this->progress[$i]['number'])*100;
-           } else {
-             $percent = 0;
-           }
-           $percent=round ($percent,2);
-           echo"<td class='td'>$percent %</td>";
-           echo"<td class='td'> <a href='?site=progress&amp;action=showIncorrectAnswers&amp;lp_id=".$this->progress[$i]['lp_id']."&amp;t_id=$this->topic'><img src='images/details.png' class='linkimage' alt='' /></a></td>";
-           echo "</tr>";
+          echo"<td class='td'>$i</td>";
+          echo"<td class='td'>".$this->progress[$i]['date']."</td>";
+          echo"<td class='td'>".$this->progress[$i]['number']."</td>";
+          echo"<td class='td'>".getPassedImage($this->progress[$i]['passed'])."</td>";
+          if ($this->progress[$i]['number'] > 0) {
+            $percent=($this->progress[$i]['correct']/$this->progress[$i]['number'])*100;
+          } else {
+            $percent = 0;
+          }
+          $percent=round ($percent,2);
+          echo"<td class='td'>$percent %</td>";
+          echo"<td class='td'> <a href='?site=progress&amp;action=showIncorrectAnswers&amp;lp_id=".$this->progress[$i]['lp_id']."&amp;t_id=$this->topic'><img src='images/details.png' class='linkimage' alt='' /></a></td>";
+          echo "</tr>";
         }
         $this->totalresult['count']=$i;
-         echo "<tr>";
-         echo "<td class='td' colspan='6' align='center'>".Statistic_04.' '.$this->totalresult['passed'].'/'.$this->totalresult['count']."</td>";
-         echo "</tr>";
+        echo "<tr>";
+        echo "<td class='td' colspan='6' align='center'>".Statistic_04.' '.$this->totalresult['passed'].'/'.$this->totalresult['count']."</td>";
+        echo "</tr>";
         echo"</table>";
-     }
+      }
     }
 
-   function checkProgressData(){
+    function checkProgressData(){
       if(count($this->progress)==0) echo "<div class='h8'>".Global_07."</div>";
       else {
         $percentArray=array();
         $limit=count($this->progress);
-          if($limit>$this->maximum){
-            $k=($limit-$this->maximum)+1;
-            $limit=($k+$this->maximum)-1;
-            echo '<h5 class="centered">'.Class_Progress_02." ".Class_Progress_03." $this->maximum ".Class_Progress_04.".</h5>";
-          } else $k=1;
-          $j=0;
+        if($limit>$this->maximum){
+          $k=($limit-$this->maximum)+1;
+          $limit=($k+$this->maximum)-1;
+          echo '<h5 class="centered">'.Class_Progress_02." ".Class_Progress_03." $this->maximum ".Class_Progress_04.".</h5>";
+        } else $k=1;
+        $j=0;
 
-      for ($i=$k;$i<=$limit;$i++){
-        if ($this->progress[$i]['number'] > 0) {
-          $percent=($this->progress[$i]['correct']/$this->progress[$i]['number'])*100;
-        } else {
-          $percent=0;
+        for ($i=$k;$i<=$limit;$i++){
+          if ($this->progress[$i]['number'] > 0) {
+            $percent=($this->progress[$i]['correct']/$this->progress[$i]['number'])*100;
+          } else {
+            $percent=0;
+          }
+          $this->percentArray[$j][]=$this->progress[$i]['date'];
+          $this->percentArray[$j][]=$percent;
+          $j++;
         }
-        $this->percentArray[$j][]=$this->progress[$i]['date'];
-        $this->percentArray[$j][]=$percent;
-        $j++;
-      }
       }
     }
 
@@ -156,10 +156,10 @@ class Progress
       $query = mysql_query($sql);
       $i=1;
       while($incorrect_answers =mysql_fetch_array($query,MYSQL_BOTH  ))
-            {
-              $this->incorrect_answers[$i]['q_id']=$incorrect_answers['q_id'];
-              $i++;
-            }
+      {
+        $this->incorrect_answers[$i]['q_id']=$incorrect_answers['q_id'];
+        $i++;
+      }
       $this->showIncorrectAnswers();
     }
 
@@ -170,31 +170,30 @@ class Progress
       echo "<table class='table_show_incorrect'>";
 
 
-        for ($i=1;$i<=count($this->incorrect_answers);$i++){
+      for ($i=1;$i<=count($this->incorrect_answers);$i++){
         echo"<tr>";
-          echo "<td class='nr_incorrect' valign='top'> $i.) </td>";
-          $sql="SELECT question,qt_id FROM questions WHERE q_id=".intval($this->incorrect_answers[$i]['q_id'])."";
-          $query = mysql_query($sql);
-          while($question =mysql_fetch_array($query,MYSQL_BOTH  )) {
+        echo "<td class='nr_incorrect' valign='top'> $i.) </td>";
+        $sql="SELECT question,qt_id FROM questions WHERE q_id=".intval($this->incorrect_answers[$i]['q_id'])."";
+        $query = mysql_query($sql);
+        while($question =mysql_fetch_array($query,MYSQL_BOTH  )) {
           if( $question['qt_id']==4){
-          $questionText=$this->getFIBQuestion( $question['question']);
+            $questionText=$this->getFIBQuestion( $question['question']);
 
-          echo"<td class='question_incorrect' valign='top'>".$questionText."</td>";
+            echo"<td class='question_incorrect' valign='top'>".$questionText."</td>";
 
-          }
-          else{
+          } else {
             echo "<td class='question_incorrect' valign='top'>". $question['question']."</td>";
-            }
           }
-          echo"</tr>";
         }
-       if($this->progress [$this->lp_id]['wrong']>count($this->incorrect_answers)) {
-         $number=$this->progress [$this->lp_id]['wrong']-count($this->incorrect_answers);
-         echo"<tr>";
-         echo "<td class='nr_incorrect' valign='top'>  </td>";
-         echo"<td class='question_incorrect' valign='top' >".Class_Progress_06." $number  ".Class_Progress_07."</td>";
-         echo"</tr>";
-        }
+        echo"</tr>";
+      }
+      if($this->progress [$this->lp_id]['wrong']>count($this->incorrect_answers)) {
+        $number=$this->progress [$this->lp_id]['wrong']-count($this->incorrect_answers);
+        echo"<tr>";
+        echo "<td class='nr_incorrect' valign='top'>  </td>";
+        echo"<td class='question_incorrect' valign='top' >".Class_Progress_06." $number  ".Class_Progress_07."</td>";
+        echo"</tr>";
+      }
       echo"<tr>";
       echo "<td class='nr_incorrect'>  </td>";
       echo"<td class='Button_row' > <input name='submit' class='Button_rightColumn' type='submit' value='".Global_02."'/></td> ";
@@ -205,23 +204,22 @@ class Progress
     }
 
     function getFIBQuestion($question){
-          $addSlashes= preg_quote( $question, '[^]'); // Slash hinzufügen wenn KLammer gefunden wird
-          $array=explode('\\',$addSlashes); // String teilen
-          $questionText= $question;
-          if(substr_count($question,"[")==substr_count($question,"]")) { // gleiche anzahl von Klammer auf und zu
-          for($i=1;$i<=substr_count($question,"[");$i++){ // Wird solange durchlaufne wie Klammern vorhanden sind
-            $beginPos = strpos($questionText, "["); // Anfangspunkt festlegen
-            $endPos=strpos($questionText, "]"); // Endpunkt festlegen
-            $length=(($endPos+1)-$beginPos) ; // Länge der Strings ermitteln
-            $answer=substr ($questionText,$beginPos,$length );// den String zwischen den Klammern suchen
-            $questionText=str_replace($answer,'(xxx)', $questionText); // gespeicherten Wert aus string löschen
-            $answer=str_replace("]",'', $answer); // Klammer entfernen
-            $key = array_search($answer, $array);
-            $answer=str_replace("[",'', $answer); // Klammer entfernen
-
-            }
-          }
-          return $questionText;
+      $addSlashes= preg_quote( $question, '[^]'); // Slash hinzufügen wenn KLammer gefunden wird
+      $array=explode('\\',$addSlashes); // String teilen
+      $questionText= $question;
+      if(substr_count($question,"[")==substr_count($question,"]")) { // gleiche anzahl von Klammer auf und zu
+        for($i=1;$i<=substr_count($question,"[");$i++){ // Wird solange durchlaufne wie Klammern vorhanden sind
+          $beginPos = strpos($questionText, "["); // Anfangspunkt festlegen
+          $endPos=strpos($questionText, "]"); // Endpunkt festlegen
+          $length=(($endPos+1)-$beginPos) ; // Länge der Strings ermitteln
+          $answer=substr ($questionText,$beginPos,$length );// den String zwischen den Klammern suchen
+          $questionText=str_replace($answer,'(xxx)', $questionText); // gespeicherten Wert aus string löschen
+          $answer=str_replace("]",'', $answer); // Klammer entfernen
+          $key = array_search($answer, $array);
+          $answer=str_replace("[",'', $answer); // Klammer entfernen
+        }
+      }
+      return $questionText;
     }
 
     function getPassedImage($passed){
