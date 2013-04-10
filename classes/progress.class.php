@@ -87,11 +87,17 @@ class Progress
           echo $this->progress[$i]['lp_id']."&amp;t_id=$this->topic'><img src='images/details.png' class='linkimage' alt='' /></a></td>";
           echo "</tr>";
         }
-        $this->totalresult['count']=$i;
+        $this->totalresult['count']=$i-1;
         echo "<tr>";
         echo "<td class='td' colspan='6' align='center'>".Statistic_04.' '.$this->totalresult['passed'].'/'.$this->totalresult['count']."</td>";
-        echo "</tr>";
+        echo "</tr>\n";
         echo"</table>";
+        if ($this->totalresult['passed'] > 0) {
+          echo "<form class='info' action='index.php?site=start_test&amp;action=requestCert' method='post'>";
+          echo "<input type='hidden' name='t_id' value='$this->topic' />";
+          echo "<input name='submit' class='Button_middle' type='submit' value='".Class_Quiz_11_RequestCert."' />";
+          echo "</form>";
+        }
       }
     }
 
