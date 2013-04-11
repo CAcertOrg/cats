@@ -1,0 +1,68 @@
+Installation procedure for CATS
+===============================
+
+Prerequesites
+-------------
+
+Note that the version numbers are for the versions used to verify the procedure.
+There are no explicit version dependencies, so the software should run with newer versions,
+and will probably also support (moderately) older ones.
+
+- Apache 2.2.4 is installed and configured to run with HTTPS. The CAcert roots should
+  be trusted. 
+- PHP 5.2.4
+- MySQL (Version 5.0) is installed and running
+- git (version 1.5.2.4) is installed and has access to github.com
+- You have a browser with a valid CAcert client certificate installed
+- You may want to set up your own CAcert testsystem like described in https://wiki.cacert.org/Software
+  to play around with certificates more freely
+
+
+Setup
+-----
+
+- Get CATS from github into your webserver's document directory (or any subdir):
+  git clone git@github.com:CAcertOrg/cats.git
+- Checkout your favourite branch, for example "git checkout release" for the installed productive version
+  or "git checkout testserver" to get a mirror of the testserver.
+
+- Connect to your MySQL server with an administrative user and create a database for CATS:
+  CREATE DATABASE cats_db;
+- Create a user for CATS to access the database:
+  CREATE USER cats-user IDENTIFIED BY '<a password>';
+- Grant the necessary user rights. These are a bit more than the absolute minimum:
+  GRANT DELETE, INSERT, SELECT, UPDATE ON cats_db.* TO cats_user;
+- Change the database context to the newly created cats_db:
+  USE cats_db;
+- Execute the scripts from the database subdirectory to create the database structure:
+  SOURCE create_db.sql;
+- Check the current version of the database:
+  SELECT MAX(version) FROM schema_version;
+- Execute all update*.sql in numerical order which have a number bigger than the current
+  schema version. If the select statement returns an error (ERROR 1146 (42S02): Table 
+  'cats_db.schema_version' doesn't exist) execute all of them.
+  SOURCE update1.sql;
+- You will probably want to load a sample test by executing sample_test.sql from the 
+  database directory:
+  SOURCE sample_test.sql;
+
+- Change to cats directory, copy index.php.template to index.php
+- Edit index.php, replace the string "FILEPATHTOHERE" with the absolute path of the 
+  cats directory. Make sure to finish with a slash.
+- Change to the includes subdirectory
+- Copy db_connect.inc.template to db_connect.inc
+- Edit db_connect.inc 
+
+- Make sure that the directive "SSLVerifyClient optional" or "SSLVerifyClient require"
+  are active for the CATS web directory, otherwise no client certificate login is requested
+  from your browser
+
+
+Create an administrative user
+-----------------------------
+
+- Open your browser and browse to your CATS web directory using https.
+- Click "Login" and accept registering with "Yes"
+- Connect to your mysql database
+- Set the admin flag on all existing users (should be only one):
+  UPDATE USER SET admin=1;
