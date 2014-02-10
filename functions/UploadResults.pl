@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 use Socket;
 use Net::SSLeay qw(die_now die_if_ssl_error) ;
 use DBI;
@@ -8,7 +8,7 @@ my $KeyFile = "key_200808.pem";
 my $CAfile = "CAcert_roots.pem";
 my $TargetHost="secure.cacert.org";
 my $TargetScript="cats/cats_import.php";
-my $ConnectInc="/home/cats/public_html/includes/db_connect.inc";
+my $ConnectInc="/var/www/cats1.it-sls.de/training/public/includes/db_connect.inc";
 
 sub url_encode($)
 {
