@@ -33,7 +33,13 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
   } else {
     $site="site=topic&amp;action=getQuestions&amp;t_id=$t_id";
   }
-  
+
+  // Fetch encoding from session, simplifies future switch to utf-8 encoding.
+  $encoding = $_SESSION['_config']['encoding'];
+  if (!$encoding) {
+    $encoding = "iso-8859-1"; // Backwards compatibility
+  }
+ 
   // Löschen der Session Variable
   if (isset($_SESSION['values']['question']['new'])) unset($_SESSION['values']['question']['new']); 
     
@@ -45,7 +51,7 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
                     // Wertzuweisung 
                     $questPerQuiz=0; if(isset($_REQUEST["questPerQuiz"]))$questPerQuiz =abs(intval($_REQUEST["questPerQuiz"]));
                     $rawToPass=0; if(isset($_REQUEST["rawToPass"]))$rawToPass =abs(intval($_REQUEST["rawToPass"]));
-                    $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"]); // Umwandlung von Sonderzeichen in HTML-Code
+                    $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"], ENT_COMPAT | ENT_HTML401, $encoding); // Umwandlung von Sonderzeichen in HTML-Code
   
                     $topics->setTopicName($name);
                     $checkNum=$topics->setNumOfQu($questPerQuiz);
@@ -157,8 +163,8 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
     case 'updateQuestion': { // Question updaten
     
                             // Wertzuweisung
-                            $questionText=""; if(isset($_REQUEST["question"]))$questionText= htmlspecialchars($_REQUEST["question"]);
-                            $descriptionText=""; if(isset($_REQUEST["descriptionText"]))$descriptionText= htmlspecialchars($_REQUEST["descriptionText"]);
+                            $questionText=""; if(isset($_REQUEST["question"]))$questionText= htmlspecialchars($_REQUEST["question"], ENT_COMPAT | ENT_HTML401, $encoding);
+                            $descriptionText=""; if(isset($_REQUEST["descriptionText"]))$descriptionText= htmlspecialchars($_REQUEST["descriptionText"], ENT_COMPAT | ENT_HTML401, $encoding);
                             $description=0; if(isset($_REQUEST["description"]))$description=$_REQUEST["description"];
                             
                             $question->setID($q_id);
@@ -234,7 +240,7 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
         case 'updateTopic':{ // Topic updaten
         
                             //Wertzuweisung
-                            $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"]); 
+                            $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"], ENT_COMPAT | ENT_HTML401, $encoding); 
                             $numofQuiz=0; if(isset($_REQUEST["questPerQuiz"]))$numOfQuiz =abs(intval($_REQUEST["questPerQuiz"]));
                             $rawToPass=0; if(isset($_REQUEST["rawToPass"])) $rawToPass =abs(intval($_REQUEST["rawToPass"]));
                             
