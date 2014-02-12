@@ -1,6 +1,5 @@
 <?php
 // Session starten
-session_register(); 
 @session_start();
 
   // For the moment we are using ISO8859, should be changed to UTF-8 in the future...
