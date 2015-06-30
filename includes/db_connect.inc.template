@@ -2,7 +2,7 @@
 
 $_SESSION['_config']['normalhostname'] = "HOSTNAME";
 $_SESSION['_config']['securehostname'] = "HOSTNAME";
-$_SESSION['_config']['folder'] = "/";
+$_SESSION['_config']['folder'] = "";
 
 // Variablen intialisieren für MySQL
 // Do not change variable names, other scripts are parsing this file for them!
@@ -19,5 +19,5 @@ $database="DATABASE";
 
   // Wählt DB aus oder gibt Meldung aus
   mysql_select_db("$database") or die
- ("Die Datenbank existiert nicht"); 
+ ("Die Datenbank existiert nicht");
 ?>
