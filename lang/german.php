@@ -81,12 +81,16 @@ define("Class_Quiz_08","bestanden");
 define("Class_Quiz_09","nicht bestanden");/*Bsp:You have reached 0 %  and so you did not pass  */
 define("Class_Quiz_10_AnonymousCert", "Sie haben ein anonymes Zertifikat zum Anmelden verwendet, deshalb können Sie keine Bestätigung beantragen.<br>");
 define("Class_Quiz_11_RequestCert", "Bestätigung beantragen");
+/*
 define("Class_Quiz_12_ExplainCert", "Aus Datenschutzgründen dürfen wir hier keine persönlichen Daten von Ihnen abfragen.<br /><br />".
                                     "Um eine Bestätigung ausgedruckt oder als PDF zu beantragen schicken Sie bitte eine EMail an <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificate for AssurerChallenge\">education@cacert.org</a> in der Sie uns sagen, ob Sie eine gedrucktes oder eine elektronische (PDF-)Bestätigung beantragen. Falls Sie eine gedruckte Bestätigung wünschen geben Sie bitte auch Ihre Postanschrift an.<br />".
                                     "Die Mail kann <a class=\"http\" href=\"education.txt\">verschlüsselt</a> und <b>muss mit dem Zertifikat signiert sein, dass Sie zum Login für diesen Test verwendet haben</b>, damit wir anhand der Seriennummer prüfen können, ob Sie den Test tatsächlich bestanden haben. ".
                                     "Ein Blick auf den \"eingelogged als:\" Kasten an der oberen rechten Ecke gibt Ihnen Informationen über das Zertifikat, das Sie gerade benutzen.<br />".
                                     "<br /><em>Für eine gedruckte Bestätigung bitten wir Sie um eine Spende in Höhe von etwa 5 EUR für Versand innerhalb Europas und 10 EUR für weltweiten Versand um die Kosten für Herstellung und Versand zu abzudecken.<br />".
                                     "Um über PayPal zu spenden können Sie den Button unten verwenden, <a class=\"http\" href=\"https://www.cacert.org/index.php?id=13\">https://www.cacert.org/index.php?id=13</a> zeigt Ihnen alle Möglichkeiten, wie Sie CAcert Spenden zukommen lassen können.</em><br />".
+                                    "<br />Wir bitten Sie, die Unannehmlichkeiten zu entschuldigen.<br />");*/
+define("Class_Quiz_12_ExplainCert", "Aus Datenschutzgründen dürfen wir hier keine persönlichen Daten von Ihnen abfragen.<br /><br />".
+                                    "Wir können momentan keine Anfragen nach Urkunden bearbeiten. Sie können trotzdem eines beantragen indem Sie eine Mail an <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificate for AssurerChallenge\">education@cacert.org</a> schicken, aber Sie sollten davon ausgehen dass die Bearbeitung <b>sehr</b> lange dauern wird!<br />".
                                     "<br />Wir bitten Sie, die Unannehmlichkeiten zu entschuldigen.<br />");
 define("Class_Quiz_13_Donate5", "5 EUR für Versand innerhalb Europas");
 define("Class_Quiz_14_Donate10", "10 EUR für Versand außerhalb Europas");

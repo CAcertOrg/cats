@@ -81,12 +81,17 @@ define("Class_Quiz_08","passed the test.");
 define("Class_Quiz_09","not passed the test.");/*Bsp:You have reached 0 %  and so you did not pass  */
 define("Class_Quiz_10_AnonymousCert", "You did the test using an anonymous certificate so you can not request a printed or PDF certificate for passing the test.<br />");
 define("Class_Quiz_11_RequestCert", "Request Certificate");
+/* Original text 
 define("Class_Quiz_12_ExplainCert", "Due to privacy concerns we may not collect your personal data here.<br /><br />".
                                     "To request a printed or PDF certificate send a mail to <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificate for AssurerChallenge\">education@cacert.org</a> and tell us if you want the printed or PDF version. If you'd like a printed certificate please include your postal address.<br />".
                                     "The mail may be <a class=\"http\" href=\"education.txt\">encrypted</a> and <b>must be signed by the certificate you used to do the test</b> so we can verify that you did pass the test by checking its serial number. ".
                                     "Have a look at the \"logged in as:\" box at the upper right corner to find out something about the certificate you are using.<br />".
                                     "<br /><em>For a printed certificate we'd ask you for a donation of about 5 EUR for mailing inside Europe and 10 EUR for global mail to cover the cost of handling and postage.<br />".
                                     "To make a donation using PayPal click the button below, <a class=\"http\" href=\"https://www.cacert.org/index.php?id=13\">https://www.cacert.org/index.php?id=13</a> shows you all methods to donate to CAcert.</em><br />".
+                                    "<br />We are sorry for the inconvenience.<br />");*/
+/* Replacement for the time we cannot handle certificate requests */
+define("Class_Quiz_12_ExplainCert", "Due to privacy concerns we may not collect your personal data here.<br /><br />".
+                                    "We currently cannot process requests for Certificates of Achievement. You may nevertheless request on by mailing to <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificate for AssurerChallenge\">education@cacert.org</a> but please expect that handling the request may need a <b>very</b> long time!<br />".
                                     "<br />We are sorry for the inconvenience.<br />");
 define("Class_Quiz_13_Donate5", "5 EUR for postage inside Europe");
 define("Class_Quiz_14_Donate10", "10 EUR for postage outside Europe");
