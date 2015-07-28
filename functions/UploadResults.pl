@@ -8,7 +8,7 @@ my $KeyFile = "key_200808.pem";
 my $CAfile = "CAcert_roots.pem";
 my $TargetHost="secure.cacert.org";
 my $TargetScript="cats/cats_import.php";
-my $ConnectInc="/var/www/cats1.it-sls.de/training/public/includes/db_connect.inc";
+my $ConnectInc="/home/cats/public_html/includes/db_connect.inc";
 
 sub url_encode($)
 {
