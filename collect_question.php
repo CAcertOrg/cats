@@ -29,10 +29,10 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
                           // Wertzuweisung
                           $_SESSION ['values']['question']['t_id']=0; if($_POST["t_id"])$_SESSION ['values']['question']['t_id'] =abs(intval($_REQUEST["t_id"]));
                           $_SESSION ['values']['question']['qt']=0;if($_POST["qt"])$_SESSION ['values']['question']['qt'] =abs(intval($_REQUEST["qt"]));
-                          $_SESSION ['values']['question']['questionText']=''; if($_POST["questionText"])$_SESSION ['values']['question']['questionText']= htmlspecialchars($_REQUEST["questionText"], ENT_COMPAT | ENT_HTML401, $encoding); // Umwandlung von Sonderzeichen in HTML-Code
-                          $new=""; if($_REQUEST["new"])$new= htmlspecialchars($_POST["new"], ENT_COMPAT | ENT_HTML401, $encoding); // Umwandlung von Sonderzeichen in HTML-Code
+                          $_SESSION ['values']['question']['questionText']=''; if($_POST["questionText"])$_SESSION ['values']['question']['questionText']= $_REQUEST["questionText"];
+                          $new=""; if($_REQUEST["new"])$new= $_POST["new"];
                           $_SESSION ['values']['question']['description']=0; if($_POST["description"])$_SESSION ['values']['question']['description']=abs(intval($_POST["description"]));
-                          $_SESSION ['values']['question']['descriptionText']="";if($_POST["descriptionText"])$_SESSION ['values']['question']['descriptionText']=htmlspecialchars($_POST["descriptionText"], ENT_COMPAT | ENT_HTML401, $encoding);
+                          $_SESSION ['values']['question']['descriptionText']="";if($_POST["descriptionText"])$_SESSION ['values']['question']['descriptionText']=$_POST["descriptionText"];
 
                           // Session Variable setzen
                           $_SESSION ['values']['question']['new']=1;
@@ -130,9 +130,9 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
 
                 // Wertzuweisung
                 $qt_id=0; if(isset($_GET['qt_id'])) $qt_id=abs(intval($_GET['qt_id']));
-                $error=""; if(isset($_GET["error"])) $error= htmlspecialchars($_GET["error"], ENT_COMPAT | ENT_HTML401, $encoding); // Umwandlung von Sonderzeichen in HTML-Code
-                $new=""; if(isset($_GET['new'])) $new=htmlspecialchars($_GET['new'], ENT_COMPAT | ENT_HTML401, $encoding);
-                $questionText=""; if(isset($_REQUEST["questionText"])) $questionText= htmlspecialchars($_REQUEST["questionText"], ENT_COMPAT | ENT_HTML401, $encoding);
+                $error=""; if(isset($_GET["error"])) $error= $_GET["error"];
+                $new=""; if(isset($_GET['new'])) $new=$_GET['new'];
+                $questionText=""; if(isset($_REQUEST["questionText"])) $questionText= $_REQUEST["questionText"];
 
                 // Sessionvariable setzen
                 $_SESSION['values']['error']=$error;

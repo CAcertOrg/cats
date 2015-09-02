@@ -51,7 +51,7 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
                     // Wertzuweisung 
                     $questPerQuiz=0; if(isset($_REQUEST["questPerQuiz"]))$questPerQuiz =abs(intval($_REQUEST["questPerQuiz"]));
                     $rawToPass=0; if(isset($_REQUEST["rawToPass"]))$rawToPass =abs(intval($_REQUEST["rawToPass"]));
-                    $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"], ENT_COMPAT | ENT_HTML401, $encoding); // Umwandlung von Sonderzeichen in HTML-Code
+                    $name=""; if(isset($_REQUEST["new_topic"]))$name= $_REQUEST["new_topic"];
   
                     $topics->setTopicName($name);
                     $checkNum=$topics->setNumOfQu($questPerQuiz);
@@ -163,8 +163,8 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
     case 'updateQuestion': { // Question updaten
     
                             // Wertzuweisung
-                            $questionText=""; if(isset($_REQUEST["question"]))$questionText= htmlspecialchars($_REQUEST["question"], ENT_COMPAT | ENT_HTML401, $encoding);
-                            $descriptionText=""; if(isset($_REQUEST["descriptionText"]))$descriptionText= htmlspecialchars($_REQUEST["descriptionText"], ENT_COMPAT | ENT_HTML401, $encoding);
+                            $questionText=""; if(isset($_REQUEST["question"]))$questionText= $_REQUEST["question"];
+                            $descriptionText=""; if(isset($_REQUEST["descriptionText"]))$descriptionText= $_REQUEST["descriptionText"];
                             $description=0; if(isset($_REQUEST["description"]))$description=$_REQUEST["description"];
                             
                             $question->setID($q_id);
@@ -240,7 +240,7 @@ if(($_SESSION['profile']['loggedin']==1) &&($_SESSION['profile']['admin']==1)){
         case 'updateTopic':{ // Topic updaten
         
                             //Wertzuweisung
-                            $name=""; if(isset($_REQUEST["new_topic"]))$name= htmlspecialchars($_REQUEST["new_topic"], ENT_COMPAT | ENT_HTML401, $encoding); 
+                            $name=""; if(isset($_REQUEST["new_topic"]))$name= $_REQUEST["new_topic"]; 
                             $numofQuiz=0; if(isset($_REQUEST["questPerQuiz"]))$numOfQuiz =abs(intval($_REQUEST["questPerQuiz"]));
                             $rawToPass=0; if(isset($_REQUEST["rawToPass"])) $rawToPass =abs(intval($_REQUEST["rawToPass"]));
                             
