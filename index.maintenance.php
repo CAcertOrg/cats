@@ -3,6 +3,7 @@
 <head>
 <title>CATS maintenance</title>
 <link rel="stylesheet" type="text/css" href="design/design.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="CATS, CAcert Assurer Testing System, CAcert, CAcert Automated Testing System, CAcert.org" />
 </head>
 <body>
