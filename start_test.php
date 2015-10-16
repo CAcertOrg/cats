@@ -81,7 +81,8 @@ if($_SESSION['profile']['loggedin']==1){
     if ($haspassed) {
       // A paper/PDF certificate for passing the test has been requested.
       echo "<br />".Class_Quiz_12_ExplainCert;
-      echo "<br />\n".
+      // PayPal-Buttons. Removed while we cannot process certificate requests
+/*      echo "<br />\n".
         "<table>\n".
 				"<tr>\n".
 				"<td align=\"center\">\n".
@@ -105,7 +106,7 @@ if($_SESSION['profile']['loggedin']==1){
 				"<td>".Class_Quiz_13_Donate5."</td>\n".
 				"<td>".Class_Quiz_14_Donate10."</td>\n".
 				"</tr>\n".
-				"</table>\n";
+				"</table>\n";*/
     } else {
       // Test wurde nie bestanden
       echo "<br />" . Class_Quiz_09;
