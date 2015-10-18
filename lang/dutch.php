@@ -140,6 +140,8 @@ define("Index_01","aangemeld als :");
 define("Login_01","Uw certificaat kon niet gecontroleerd worden.");
 define("Login_02","Uw certificaat is ingetrokken.");
 define("Login_03_No_Org_Certs","Organisatie (OA) certificaten worden niet aanvaard door CATS omdat deze niet eenvoudig naar een gebruikersaccount te herleiden zijn.");
+define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
+                                  "Server certificates cannot be used to log in to CATS since they do not identify a person.");
 define("Menue_01","Help");
 define("Menue_02","Aanmelden");
 define("Menue_03","Afmelden");

@@ -144,6 +144,8 @@ define("Index_01","Connecté en tant que:");
 define("Login_01","Votre certificat n'a pas pu être validé.");
 define("Login_02","Votre certificat a été révoqué.");
 define("Login_03_No_Org_Certs","Les certificats d'organisation ne sont pas acceptés pour le CATS car ils ne sont pas directement liés à un compte utilisateur.");
+define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
+
 define("Menue_01","Aide");
 define("Menue_02","connexion");
 define("Menue_03","déconnexion");
