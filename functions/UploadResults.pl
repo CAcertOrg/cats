@@ -207,9 +207,10 @@ do {
     Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
 
     # Add client certificate
-    Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
-    #Net::SSLeay::CTX_use_certificate_chain_file($ctx, $CertFile);
-    #Net::SSLeay::CTX_use_PrivateKey_file($ctx, $KeyFile, &Net::SSLeay::FILETYPE_PEM);
+    # set_cert_and_key does not load a chain file, so use the low-level functions
+    #Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
+    Net::SSLeay::CTX_use_certificate_chain_file($ctx, $CertFile);
+    Net::SSLeay::CTX_use_PrivateKey_file($ctx, $KeyFile, &Net::SSLeay::FILETYPE_PEM);
 
     $ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
     Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
