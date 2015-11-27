@@ -3,8 +3,9 @@ use Socket;
 use Net::SSLeay qw(die_now die_if_ssl_error) ;
 use DBI;
 
-my $CertFile = "cert_200808.pem";
-my $KeyFile = "key_200808.pem";
+# Be sure the CertFile includes a key chain if you are using class 3 certificates
+my $CertFile;
+my $KeyFile;
 my $CAfile = "CAcert_roots.pem";
 my $TargetHost="secure.cacert.org";
 my $TargetScript="cats/cats_import.php";
@@ -57,7 +58,7 @@ sub SendRecord($$$$$$)
     die_if_ssl_error("ssl_read_CRLF");
     if (!$CurLine) {
       print "ssl_read_CRLF returns nothing\n";
-      return "BREAK";
+      return (1, "BREAK");
     }
     if (CurLine =~ /^HTTP\/[0-9.]+ (\d+) (.+)/i) {
       $HTTPResult = $1;
@@ -205,8 +206,10 @@ do {
     # Set accepted CAs
     Net::SSLeay::CTX_load_verify_locations($ctx, $CAfile, 0);
 
-    # Add client vertificate
+    # Add client certificate
     Net::SSLeay::set_cert_and_key($ctx, $CertFile, $KeyFile);
+    #Net::SSLeay::CTX_use_certificate_chain_file($ctx, $CertFile);
+    #Net::SSLeay::CTX_use_PrivateKey_file($ctx, $KeyFile, &Net::SSLeay::FILETYPE_PEM);
 
     $ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
     Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
