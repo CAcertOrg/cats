@@ -2,6 +2,7 @@
 use Socket;
 use Net::SSLeay qw(die_now die_if_ssl_error) ;
 use DBI;
+use Cwd 'abs_path';
 
 # Be sure the CertFile includes a key chain if you are using class 3 certificates
 my $CertFile;
@@ -9,7 +10,18 @@ my $KeyFile;
 my $CAfile = "CAcert_roots.pem";
 my $TargetHost="secure.cacert.org";
 my $TargetScript="cats/cats_import.php";
-my $ConnectInc="/home/cats/public_html/includes/db_connect.inc";
+#my $ConnectInc="/home/cats/public_html/includes/db_connect.inc";
+# Trying to be location invariant...
+my $ConnectInc=my_dir() . "/../includes/db_connect.inc";
+
+sub my_dir()
+{
+  my $dir = abs_path($0);
+  #Strip filename
+  $dir =~ s/\/[^\/]+$//;
+  
+  return $dir;
+}
 
 sub url_encode($)
 {
@@ -176,7 +188,7 @@ $sth = $dbh->prepare("SELECT `lp`.`lp_id`, `lp`.`user_id`, `lp`.`root`, `tt`.`te
                      "FROM `learnprogress` AS `lp`, `topics` AS `t`, `topic_type` AS `tt` ".
                      "WHERE `lp`.`t_id`=`t`.`t_id` AND `lp`.`percentage` >= `t`.`percentage` AND `lp`.`correct`>0 ".
                      "  AND `t`.`type_id`=`tt`.`type_id` ".
-                     "  AND `t`.`type_id` in (1, 3) ". # Upload Assurer Challenge and Triage challenge
+                     "  AND `t`.`type_id` in (1, 3, 4) ". # Upload Assurer Challenge, Triage challenge and Data Privacy Quiz
                      "  AND `lp`.`uploaded` IS NULL");
 if (!$sth->execute()) {
   die($sth->errstr);
@@ -184,6 +196,7 @@ if (!$sth->execute()) {
 
 $port = 443;
 $dest_ip = gethostbyname ($TargetHost);
+
 $dest_serv_params  = sockaddr_in($port, $dest_ip);
 
 # Exchange data
@@ -213,6 +226,7 @@ do {
     Net::SSLeay::CTX_use_PrivateKey_file($ctx, $KeyFile, &Net::SSLeay::FILETYPE_PEM);
 
     $ssl = Net::SSLeay::new($ctx) or die_now("Failed to create SSL $!");
+    Net::SSLeay::set_tlsext_host_name($ssl, $TargetHost);
     Net::SSLeay::set_fd($ssl, fileno(S));   # Must use fileno
     $res = Net::SSLeay::connect($ssl) and die_if_ssl_error("ssl connect");
     #print "Cipher `" . Net::SSLeay::get_cipher($ssl) . "'\n";
