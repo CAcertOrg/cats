@@ -29,7 +29,7 @@ Setup
 - Connect to your MySQL server with an administrative user and create a database for CATS:
   CREATE DATABASE cats_db;
 - Create a user for CATS to access the database:
-  CREATE USER 'cats-user' IDENTIFIED BY '<a password>';
+  CREATE USER 'cats_user' IDENTIFIED BY '<a password>';
 - Grant the necessary user rights. These are a bit more than the absolute minimum:
   GRANT DELETE, INSERT, SELECT, UPDATE ON cats_db.* TO cats_user;
 - Change the database context to the newly created cats_db:
