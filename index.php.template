@@ -1,10 +1,13 @@
 <?php
 // Session starten
-@session_start();
+session_start();
 
-  // For the moment we are using ISO8859, should be changed to UTF-8 in the future...
-  header('Content-Type: text/html; charset=iso-8859-1');
+// For the moment we are using ISO8859, should be changed to UTF-8 in the future...
+header('Content-Type: text/html; charset=iso-8859-1');
 
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd"><?php
+  
  $_SESSION['_config']['filepath'] = "FILEPATHTOHERE"; // Filepath
  
   // Dateien einbinden 
