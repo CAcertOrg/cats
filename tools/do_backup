@@ -1,0 +1,26 @@
+#!/bin/sh
+DUMPDIR=/home/ted/dumps
+rm $DUMPDIR/dump.9.gz
+mv $DUMPDIR/dump.8.gz $DUMPDIR/dump.9.gz
+mv $DUMPDIR/dump.7.gz $DUMPDIR/dump.8.gz
+mv $DUMPDIR/dump.6.gz $DUMPDIR/dump.7.gz
+mv $DUMPDIR/dump.5.gz $DUMPDIR/dump.6.gz
+mv $DUMPDIR/dump.4.gz $DUMPDIR/dump.5.gz
+mv $DUMPDIR/dump.3.gz $DUMPDIR/dump.4.gz
+mv $DUMPDIR/dump.2.gz $DUMPDIR/dump.3.gz
+mv $DUMPDIR/dump.1.gz $DUMPDIR/dump.2.gz
+mv $DUMPDIR/dump.last.gz $DUMPDIR/dump.1.gz
+# No encryption necessary on testserver...
+#sqldump --user=cats_user --password=<THE_PASSWORD> cats_db | gpg -r 0x7AFB8D26 -r 0xED30077A --batch --encrypt > $DUMPDIR/dump.last.gpg
+mysqldump --user=cats_user --password=<THE_PASSWORD> cats_db | gzip >  $DUMPDIR/dump.last.gz
+#cp $DUMPDIR/dump.last.gz /var/www/cats1.it-sls.de/training/public/dump.gz
+
+# Fetch backup of the production database
+rm $DUMPDIR/dump.in.pgp 2>/dev/null
+wget -o $DUMPDIR/dump.pgp.log -O $DUMPDIR/dump.in.pgp http://cats.cacert.org/backup.pgp
+
+if test -s $DUMPDIR/dump.in.pgp ; then
+  rm $DUMPDIR/dump.pgp 
+  mv $DUMPDIR/dump.in.pgp $DUMPDIR/dump.pgp
+fi
+

@@ -1,0 +1,134 @@
+#!/usr/bin/perl
+# This is an experimental tool script to create a nice HTML page from the CATS database to help translating
+# a test into another language and to review the result.
+# Adjust the test id of the language you want to translate into (look for $sth_q->execute), probably modify
+# the header of the page, then start the script with the database password as parameter.
+
+use strict;
+use DBI;
+
+
+sub PrintHeader {
+print <<'ENDHEADER';
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="iso-8851-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+.question {
+  font-weight: 700;
+  margin-top: 1em;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px 0 1px 0;
+}
+
+.info {
+  font-weight: 600;
+  font-style: italic;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px 0 1px 0;
+}
+
+.answer {
+  font-weight: 500;
+}
+
+.en {
+ background-color: #f2e26b; 
+}
+
+.lg {
+  background-color: #d6d7ce;
+}
+
+.disabled .en {
+ background-color: #82823b;
+}
+
+.disabled .lg {
+  background-color: #76777e;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>Translation Sheet for CATS Test CZ</h1>
+      <p>Please verify that the translation conserves the intention of the english text. It does not
+         have to be a word-by-word translation. Links may be adjusted to point to translated content,
+         if available.</p>
+      <p>The grayed out questions are currently disabled, so they won't be shown and translating them
+         is purely optional. Don't worry about true/false answers, those are translated automatically
+         by CATS.</p>
+      <p>Forward information about typos and bad language to the translator. Normally such issues 
+         should not block publication of the translation, unless the mistakes are quite serious.</p>
+      <p><b>Note</b>: The lines of english and translated answers do not necessarily match, since
+         the link between the answers was only recently implemented...</p>
+    </div>
+ENDHEADER
+}
+
+sub PrintFooter {
+print <<'ENDFOOTER';
+  </body>
+</html>
+ENDFOOTER
+}
+
+my $dsn="DBI:mysql:database=cats_db";
+my $dbh = DBI->connect($dsn, "cats_user", $ARGV[0]);
+
+PrintHeader();
+
+my $sth_aen = $dbh->prepare(
+    "SELECT a_en.a_id IDEN, a_en.answer TEXTEN ".
+     " FROM answers a_en".
+     " WHERE a_en.q_id=?".
+     " ORDER BY a_en.a_id"
+);
+my $sth_alg = $dbh->prepare(
+    "SELECT a_lg.a_id IDLG, a_lg.answer TEXTLG, a_lg.ref_a_id REF ".
+     " FROM answers a_lg".
+     " WHERE a_lg.q_id=?".
+     " ORDER BY a_lg.ref_a_id"
+);
+
+my $sth_q = $dbh->prepare(
+    "SELECT q_en.q_id IDEN, q_lg.q_id IDLG, q_en.question Q_EN, q_lg.question Q_LG, ".
+     "      qd_en.description DESCEN, qd_lg.description DESCLG, ".
+     "      q_en.active ACTIVEEN, q_lg.active ACTIVELG ".
+     " FROM questions q_lg left outer join questions q_en on (q_en.q_id=q_lg.ref_q_id) ".
+     "      LEFT OUTER JOIN question_description qd_en ON (qd_en.q_id=q_en.q_id) ".
+     "      LEFT OUTER JOIN question_description qd_lg ON (qd_lg.q_id=q_lg.q_id) ".
+     " WHERE q_lg.t_id=? ".
+     " ORDER BY q_en.q_id");
+$sth_q->execute(9); # for language cz
+#$sth_q->execute(5); # for language fr 
+while(my $ref = $sth_q->fetchrow_hashref()) {
+  print '<div class="container-fluid">'."\n";
+  print "<div class=\"row question";
+    print " disabled" if ($ref->{ACTIVEEN} != 1 || $ref->{ACTIVELG} != 1);
+    print "\"><div class=\"col-sm-6 en\">$ref->{Q_EN}</div><div class=\"col-sm-6 lg\">$ref->{Q_LG}</div></div>\n";
+  print "<div class=\"row info";
+    print " disabled" if ($ref->{ACTIVEEN} != 1 || $ref->{ACTIVELG} != 1);
+    print "\"><div class=\"col-sm-6 en\">$ref->{DESCEN}</div><div class=\"col-sm-6 lg\">$ref->{DESCLG}</div></div>\n";
+  $sth_aen->execute($ref->{IDEN});
+  $sth_alg->execute($ref->{IDLG});
+  while(my $ref2 = $sth_aen->fetchrow_hashref()) {
+    my $ref3 = $sth_alg->fetchrow_hashref();
+    print "<div class=\"row answer";
+      print " disabled" if ($ref->{ACTIVEEN} != 1 || $ref->{ACTIVELG} != 1);
+      print "\">";
+    print "<div class=\"col-sm-1 en\">$ref2->{IDEN}</div><div class=\"col-sm-5 en\">$ref2->{TEXTEN}</div>";
+    print "<div class=\"col-sm-1 lg\">$ref3->{IDLG}($ref3->{REF})</div><div class=\"col-sm-5 lg\">$ref3->{TEXTLG}</div>";
+    print "</div>\n";
+  }
+  print "</div>\n";
+}
+
+PrintFooter();
