@@ -1,0 +1,104 @@
+#!/usr/bin/perl
+#
+# Parameters: <t_id of test (topic) to be exported> <Username for DB access> <Password for DB access>
+#
+# Creates an SQL script to update a test in a database.
+# The old test is deleted first, then the updated test is re-inserted.
+# The IDs of records which existed before should stay the same.
+#
+
+use strict;
+use DBI;
+use Encode qw(decode encode);
+
+my $TopicID;
+my $TopicName;
+my $DBUser;
+my $DBPass;
+my $dbh;
+
+sub CheckArgs() {
+  my $sth;
+  my @data;
+  
+  $dbh = DBI->connect("DBI:mysql:database=cats_db", $ARGV[1], $ARGV[2]);
+  $sth = $dbh->prepare("SELECT t_id, topic FROM topics WHERE t_id=?");
+  $sth->execute($ARGV[0]);
+  @data = $sth->fetchrow_array();
+  
+  die "Cannot find topic id ".$ARGV[0]."\n" if (!@data || !$data[0]);
+  
+  $TopicName = encode("UTF-8", decode("cp-1252", $data[1]));
+  print STDERR "Exporting topic $TopicName...\n";
+  ($TopicID, $DBUser, $DBPass) = @ARGV;  
+}
+
+#
+# Create header and delete statements
+#
+sub DoHeader() {
+  print "-- Script to reload t_id $TopicID \"$TopicName\" into a CATS database\n";
+  print "--\n";
+  print "/*!40101 SET character_set_client = utf8 */;";
+  print "-- Delete old test\n";
+  print "DELETE FROM answers WHERE q_id IN (SELECT q_id FROM questions WHERE t_id=$TopicID);\n";
+  print "DELETE FROM question_description WHERE q_id IN (SELECT q_id FROM questions WHERE t_id=$TopicID);\n";
+  print "DELETE FROM questions WHERE t_id=$TopicID;\n";
+  print "DELETE FROM topics WHERE t_id=$TopicID;\n";
+  print "--\n\n";    
+}
+
+sub DoExport($$) {
+  my ($table, $restriction) = @_;
+  my $sth;
+  my @data;
+  my @type_array;
+  my $i;
+  my $Row = 1;
+  
+  $sth = $dbh->prepare("SELECT * FROM $table WHERE $restriction");
+  $sth->execute($TopicID);
+  
+  print "INSERT INTO `$table` VALUES(";
+  @type_array = @{$sth->{TYPE}};
+  while(@data = $sth->fetchrow_array()) {
+    if ($Row>1) {
+      print ",";
+    }
+    for($i=0;$i<scalar(@data);$i++) {
+      print "," if ($i > 0);
+      if (!defined($data[$i])) {
+        print "NULL";
+      } elsif ($type_array[$i] == 4) {
+        print $data[$i];
+      } else {
+        $data[$i] =~ s/([\\'"])/\\$1/g;
+        $data[$i] = encode("UTF-8", decode("cp-1252", $data[$i]));
+      	print "'$data[$i]'";
+      }
+    }
+    print ")";
+    $Row++;
+  }
+  print ";\n\n";
+}
+
+sub ExportTopic() {
+  DoExport("topics", "t_id=?");
+}
+
+sub ExportQuestions() {
+  DoExport("questions", "t_id=?");
+  DoExport("question_description", "q_id IN (SELECT q_id from questions where t_id=?)");
+}
+
+sub ExportAnswers() {
+  DoExport("answers", "q_id IN (SELECT q_id from questions where t_id=?)");
+}
+
+CheckArgs();
+DoHeader();
+ExportTopic();
+ExportQuestions();
+ExportAnswers();
+
