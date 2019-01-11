@@ -1,0 +1,5 @@
+cz.html
+*.gz
+fr.html
+includes/db_connect.inc
+index.php
