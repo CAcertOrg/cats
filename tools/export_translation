@@ -1,6 +1,8 @@
 #!/usr/bin/perl
 # This is an experimental tool script to create a nice HTML page from the CATS database to help translating
 # a test into another language and to review the result.
+# It is not yet in a "ready to run" state, there will be several things you'll have to do modify in the script
+# to fit it to your purpose.
 # Adjust the test id of the language you want to translate into (look for $sth_q->execute), probably modify
 # the header of the page, then start the script with the database password as parameter.
 
@@ -58,7 +60,7 @@ print <<'ENDHEADER';
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Translation Sheet for CATS Test CZ</h1>
+      <h1>Translation Sheet for CATS Test FR</h1>
       <p>Please verify that the translation conserves the intention of the english text. It does not
          have to be a word-by-word translation. Links may be adjusted to point to translated content,
          if available.</p>
@@ -67,10 +69,16 @@ print <<'ENDHEADER';
          by CATS.</p>
       <p>Forward information about typos and bad language to the translator. Normally such issues 
          should not block publication of the translation, unless the mistakes are quite serious.</p>
+      <p>This is not intended to verify the correctness of the english answers. Nevertheless, if
+         you think that an answer is wrong or not accurate enough, you are invited to ask your 
+         questions or post your  
+         opinion to the <a href="mailto:cacert-education@lists.cacert.org?subject=Note%20about%20CATS%20question">Education Mailing List</a>.
+         </p>
       <p><b>Note</b>: The lines of english and translated answers do not necessarily match, since
          the link between the answers was only recently implemented...</p>
-    </div>
 ENDHEADER
+  print "<p><b>Version</b>: " . gmtime(time) . " (GMT)\r\n";
+  print "</div>\r\n";
 }
 
 sub PrintFooter {
@@ -107,8 +115,8 @@ my $sth_q = $dbh->prepare(
      "      LEFT OUTER JOIN question_description qd_lg ON (qd_lg.q_id=q_lg.q_id) ".
      " WHERE q_lg.t_id=? ".
      " ORDER BY q_en.q_id");
-$sth_q->execute(9); # for language cz
-#$sth_q->execute(5); # for language fr 
+#$sth_q->execute(9); # for language cz
+$sth_q->execute(5); # for language fr 
 while(my $ref = $sth_q->fetchrow_hashref()) {
   print '<div class="container-fluid">'."\n";
   print "<div class=\"row question";
