@@ -39,7 +39,6 @@ sub CheckArgs() {
 sub DoHeader() {
   print "-- Script to reload t_id $TopicID \"$TopicName\" into a CATS database\n";
   print "--\n";
-  print "/*!40101 SET character_set_client = utf8 */;";
   print "-- Delete old test\n";
   print "DELETE FROM answers WHERE q_id IN (SELECT q_id FROM questions WHERE t_id=$TopicID);\n";
   print "DELETE FROM question_description WHERE q_id IN (SELECT q_id FROM questions WHERE t_id=$TopicID);\n";
@@ -63,7 +62,7 @@ sub DoExport($$) {
   @type_array = @{$sth->{TYPE}};
   while(@data = $sth->fetchrow_array()) {
     if ($Row>1) {
-      print ",";
+      print ",(";
     }
     for($i=0;$i<scalar(@data);$i++) {
       print "," if ($i > 0);
