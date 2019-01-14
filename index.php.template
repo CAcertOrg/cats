@@ -61,6 +61,7 @@ $languagecode = empty($_SESSION['profile']['language']) ? "en" : strtolower($_SE
   <div>
   <select size="1" class="dropdown_language" name="language">
    <option value="none">choose language</option>
+   <option value="CZ">CZ</option>
    <option value="DE">DE</option>
    <option value="EN">EN</option>
    <option value="ES">ES</option>
