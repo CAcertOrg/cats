@@ -1,6 +1,6 @@
 <?php
 define("accept_Login_01","Usted no está registrad@. <br /> Favor revise la información de su certificado y confirme el registro.");
-define("accept_Login_02","información de certificado");
+define("accept_Login_02","información del certificado");
 define("accept_Login_03","Emitido para:");
 define("accept_Login_04","Nombre común(CN)");
 define("accept_Login_05","Número de serie");
@@ -10,9 +10,9 @@ define("accept_Login_08","Organización");
 define("accept_Login_09","Unidad organizacional");
 define("accept_Login_10","Emitido el");
 define("accept_Login_11","Vence el");
-define("accept_Login_12","Registrarse con este certificado?<br /><br />".
-                         "Solamente el número de serie de este certificado será guardado, pero si desea solicitar un certificado impreso una vez haber pasado el examen, será emitido al Nombre Común incluido en el certificado!<br />".
-                         "No se emitirán impresiones para certificados anónimos (Nombre Común \"CAcert WoT User\").");
+define("accept_Login_12","¿Registrarse con este certificado?<br /><br />".
+                         "Únicamente se guardará el número de serie de este certificado, sin embargo, si desea solicitar un certificado impreso una vez haya superado la prueba, ¡Éste tendrá que emitirse al Nombre Común incluido en el certificado!<br />".
+                         "No se emitirán certificados impresos si éstos son anónimos (con Nombre Común \"CAcert WoT User\").");
 define("accept_Login_13","Validez:");
 define("Button_01","crear tema nuevo");
 define("Button_02","regresar a administración de temas");
@@ -27,117 +27,116 @@ define("Button_10","inicio de sesión exitoso");
 define("Button_11","guardar");
 define("Button_12","guardar modificaciones");
 define("Button_13","editar respuestas");
-define("Button_14","agregar respuesta");
+define("Button_14","añadir respuesta");
 define("Button_15","eliminar respuesta");
-define("Button_16","evaluar examen");
+define("Button_16","evaluar prueba");
 define("Button_17","información estadística");
 define("Button_18","información de usuario");
-define("Button_19","estadísticas de examen");
-define("Check_Cert_01","Si desea recibir un documento por servicio postal o correo electrónico, su nombre debe estar incluido en el certificado!<br /> Puede proceder con el registro, pero no será posible seleccionar las opciones <i>enviar por servicio postal</i> o <i>enviar por correo electrónico</i>.<br /> La alternativa sería cancelar este registro y volver a iniciarlo con otro certificado que sí incluye su nombre.");
-define("certificateDocu_01","Si lo desea, podemos hacer constar que pasó el examen de Asegurador exitosamente. El documento será emitido al nombre según indica su certificado digital.");
-define("certificateDocu_02","No, no requiero este documento.");
-define("certificateDocu_03","Sí, favor enviar el documento como pdf adjunto por correo electrónico  (Utilizaremos la dirección de correo electrónico y el nombre que constan en el certificado)");
-define("certificateDocu_04","Sí, favor enviar el documento por servicio postal a la siguiente dirección :");
+define("Button_19","estadísticas de las pruebas");
+define("Check_Cert_01","Si desea recibir un documento por correo postal o correo electrónico, ¡Su nombre debe estar incluido en el certificado!<br /> Puede proceder con el registro, pero no será posible seleccionar las opciones <i>enviar por correo postal</i> o <i>enviar por correo electrónico</i>.<br /> La otra alternativa sería cancelar este registro y volver a iniciarlo con otro certificado que sí incluya su nombre.");
+define("certificateDocu_01","Si lo desea, es posible hacer constar que superó la prueba de Asegurador con éxito. El documento será emitido al nombre que figure en su certificado digital.");
+define("certificateDocu_02","No, no necesito este documento.");
+define("certificateDocu_03","Sí, por favor, envíenme el documento en formato PDF adjunto por correo electrónico.  (Utilizaremos el nombre y la dirección de correo electrónico que consten en el certificado)");
+define("certificateDocu_04","Sí, por favor, envíenme el documento por correo postal a la siguiente dirección :");
 define("certificateDocu_05","nombre");
-define("certificateDocu_06","apellido");
+define("certificateDocu_06","apellidos");
 define("certificateDocu_07","calle");
 define("certificateDocu_08","código postal");
 define("certificateDocu_09","ciudad");
-define("certificateDocu_10","estado");
+define("certificateDocu_10","región/provincia");
 define("certificateDocu_11","país");
-define("certificateDocu_12","Todos los campos deben estar llenos, si desea recibirlo por servicio postal.");
+define("certificateDocu_12","Todos los campos deben estar rellenos si desea recibirlo por correo postal.");
 define("Class_Answer_01","detalles de respuestas");
 define("Class_Answer_02","respuestas");
 define("Class_Answer_03","respuesta");
 define("Class_Answer_04","Deben indicarse al menos 2 respuestas.");
-define("Class_Answer_05","Al menos una respuesta debe marcarse como 'correcto' y al menos 2 respuestas deben ser indicadas.");
-define("Class_Answer_06","Al menos una respuesta debe debe marcarse como 'correcto'");
-define("Class_Answer_07","En un texto con espacios en blanco para rellenar las respuestas correctas e incorrectas deben ser diferentes");
+define("Class_Answer_05","Al menos una respuesta se debe marcar como 'correcta' y al menos se deben indicar 2 respuestas.");
+define("Class_Answer_06","Al menos una respuesta se debe marcar como 'correcta'");
+define("Class_Answer_07","En un texto con espacios en blanco para rellenar, las respuestas correctas e incorrectas deben ser diferentes");
 define("Class_Answer_08","Debe haber al menos una respuesta correcta y una incorrecta");
 define("Class_Answer_09","correcto");
 define("Class_Answer_10","incorrecto");
 define("Class_Progress_01","número de preguntas");
 define("Class_Progress_02","Demasiada información guardada en base de datos. "); // gehört zu Lernfortschritte_angezeigt
-define("Class_Progress_03","Ver más reciente");
-define("Class_Progress_04","progreso en aprentizaje");
+define("Class_Progress_03","Ver la más reciente");
+define("Class_Progress_04","progreso en el aprendizaje");
 define("Class_Progress_05","No hay más datos disponibles"); /*Bsp: Keine weiteren Infos zu : 5 Fragen */
 define("Class_Progress_06","No hay más información disponible para:");
 define("Class_Progress_07","pregunta(s)");
 define("Class_Progress_08","preguntas respondidas incorrectamente");
-define("Class_Question_01","Haga click para ver más información sobre este tema");
+define("Class_Question_01","Haga clic para obtener más información sobre este tema");
 define("Class_Question_02","deactivar pregunta");
 define("Class_Question_03","activar pregunta ");
 define("Class_Question_04","eliminar pregunta");
 define("Class_Question_05","No hay preguntas disponibles en la base de datos");
-define("Class_Question_06","detalles sobre pregunta");
-define("Class_Quiz_01","No hay suficientes preguntas sobre este tema. Favor escoger otro tema.");
-define("Class_Quiz_02","examen");
-define("Class_Quiz_03","Evaluación de examen");
-define("Class_Quiz_04","Su puntaje total es :");
-define("Class_Quiz_05","El requerimiento mínimo para este examen es :");
+define("Class_Question_06","detalles de la pregunta");
+define("Class_Quiz_02","prueba");
+define("Class_Quiz_03","Evaluación de la prueba");
+define("Class_Quiz_04","El total de puntos es :");
+define("Class_Quiz_05","El requisito mínimo para esta prueba es:");
 define("Class_Quiz_06","Usted alcanzó: "); /*Bsp: You have reached 0 %  .... */
-define("Class_Quiz_07","y por ende");/* You have reached 0 %  and so you did not pass   */
-define("Class_Quiz_08","pasó el examen.");
-define("Class_Quiz_09","no pasó el examen.");/*Bsp:You have reached 0 %  and so you did not pass  */
-define("Class_Quiz_10_AnonymousCert", "Realizó el examen con un certificado anónimo y por ende no puede solicitar un certificado impreso o PDF por haber pasado este examen.<br />");
+define("Class_Quiz_07","y por tanto tiene");/* You have reached 0 %  and so you did not pass   */
+define("Class_Quiz_08","ha superado la prueba.");
+define("Class_Quiz_09","no ha superado la prueba.");/*Bsp:You have reached 0 %  and so you did not pass  */
+define("Class_Quiz_10_AnonymousCert", "Realizó el examen con un certificado anónimo por lo que no puede solicitar un certificado impreso o en formato PDF que certifique que ha superado la prueba.<br />");
 define("Class_Quiz_11_RequestCert", "Solicitar certificado");
-define("Class_Quiz_12_ExplainCert", "Debido a consideraciones de privacidad no recopilamos sus datos personales aquí.<br /><br />".
-                                    "Para solicitar un certificado impreso o un PDF debe enviar un correo electrónico a <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificado para Desafio de Asegurador\">education@cacert.org</a> e indicar si desea un certificado impreso o en versión PDF. Si desea un certificado impreso, favor incluir su dirección postal.<br />".
-                                    "El correo puede ser <a class=\"http\" href=\"education.txt\">cifrado</a> y <b>debe ser firmado con el certificado que utilizó en el examen</b> para que podamos verificar que realizó el examen, comparando su número de serie. ".
-                                    "Revisa el campo \"registrado como:\" en la esquina superior derecha para determinar qué certificado está utilizando.<br />".
-                                    "<br /><em> Para un certificado impreso rogamos que done 5 EUR por envíos intereuropeos y 10 EUR por envíos fuera de Europa para cubrir los gastos de transporte y correo.<br />".
-                                    "Para donar mediante PayPal utilice el botón abajo, <a class=\"http\" href=\"https://www.cacert.org/index.php?id=13\">https://www.cacert.org/index.php?id=13</a> le muestra todos los métodos de donación a CAcert.</em><br />".
-                                    "<br />Disculpe el inconveniente.<br />");
-define("Class_Quiz_13_Donate5", "5 EUR por envíos intereuropeos");
-define("Class_Quiz_14_Donate10", "10 EUR por envios fuera de Europa");
+define("Class_Quiz_12_ExplainCert", "Debido a consideraciones de privacidad no recopilamos sus datos personales.<br /><br />".
+                                    "Para solicitar un certificado impreso o en formato PDF, debe enviar un correo electrónico a <a class=\"http\" href=\"mailto:education@cacert.org?subject=Certificado de la Prueba de Asegurador\">education@cacert.org</a> e indicar si lo desea impreso o en formato PDF. Si desea un certificado impreso, por favor, indique su dirección postal.<br />".
+                                    "El correo electrónico puede ser <a class=\"http\" href=\"education.txt\">cifrado</a> y <b>deberá firmarse con el certificado que utilizó al realizar la prueba</b> para que podamos verificar que superó la prueba comparando el número de serie. ".
+                                    "Revise el campo \"ha iniciado sesión como:\" en la esquina superior derecha para determinar qué certificado está utilizando.<br />".
+                                    "<br /><em> Para obtener un certificado impreso, le pediremos que realice una donación de al menos 5 EUR para envíos dentro de Europa y de 10 EUR para envíos fuera de Europa, con el fin de cubrir los gastos de gestión y correo.<br />".
+                                    "Para realizar una donación a través de PayPal, haga clic en el botón de abajo. <a class=\"http\" href=\"https://www.cacert.org/index.php?id=13\">https://www.cacert.org/index.php?id=13</a> indica todas las formas posibles de realizar una donación a CAcert.</em><br />".
+                                    "<br />Disculpe las molestias.<br />");
+define("Class_Quiz_13_Donate5", "5 EUR para envíos dentro de Europa");
+define("Class_Quiz_14_Donate10", "10 EUR para envíos fuera de Europa");
 define("Class_Topic_01","nombre");
-define("Class_Topic_02","no. de preguntas");
-define("Class_Topic_03","preguntas por examen");
-define("Class_Topic_04","requerimiento");
+define("Class_Topic_02","número de preguntas");
+define("Class_Topic_03","preguntas en cada prueba");
+define("Class_Topic_04","requisito");
 define("Class_Topic_05","editar tema");
 define("Class_Topic_06","activar tema");
-define("Class_Topic_07","Deactivar tema: Todas las preguntas de este temas serán desactivadas también.");
+define("Class_Topic_07","Desactivar tema: Todas las preguntas de este tema también se desactivarán.");
 define("Class_Topic_08","Eliminar el tema con todas las preguntas y respuestas asignadas");
-define("Class_Topic_09","porcentaje mínimo debe ser un número y mayor que 100");
-define("Class_Topic_10","Tema ya existe.");
-define("Class_Topic_11","Número de preguntas debe ser un número entero no negativo.");
-define("Class_Topic_12","requerimiento");
+define("Class_Topic_09","el porcentaje mínimo debe ser un número inferior a 100");
+define("Class_Topic_10","El tema ya existe.");
+define("Class_Topic_11","El número de preguntas debe ser un número entero no negativo.");
+define("Class_Topic_12","requisito");
 define("Collect_Question_01","Esta pregunta ya existe ");
-define("Collect_Question_02","Debe definirse al menos un espacio en blanco. Espacios en blanco serán generados mediante [ ]. La respuesta correcta debe estar dentro de los corchetes. Todos los corchetes deberán estar cerrados. ");
-define("Collect_Question_03","digitar pregunta");
-define("Function_getContent_01","Bienvenid@");
-define("Function_getContent_02_Intro",'<div class="centered">Para ver una pequeña introducción favor revise <a href="http://wiki.cacert.org/wiki/AssurerChallenge" rel="external">el WiKi</a></div><br />');
-define("Function_getTopic_01","mostrar progreso");
-define("Function_getTopic_02","mostrar estadísticas");
-define("Function_getTopic_03","iniciar examen");
+define("Collect_Question_02","Debe definirse al menos un espacio en blanco. Los espacios en blanco se crean con [ ]. La respuesta correcta debe estar dentro de los corchetes. Todos los corchetes deberán estar cerrados. ");
+define("Collect_Question_03","escribir la pregunta");
+define("Function_getContent_01","Bienvenido");
+define("Function_getContent_02_Intro",'<div class="centered">Para ver una pequeña introducción, por favor, revise <a href="http://wiki.cacert.org/wiki/AssurerChallenge" rel="external">el WiKi</a></div><br />');
+define("Function_getTopic_01","mostrar el progreso");
+define("Function_getTopic_02","mostrar las estadísticas");
+define("Function_getTopic_03","iniciar la prueba");
 define("Function_reallyDel_01","proceso de eliminación");
-define("Function_reallyDel_02","Está segur@ que quiere eliminar este tema?");
-define("Function_reallyDel_03","Si confirma, todas las preguntas y respuestas serán eliminadas también.");
-define("Function_reallyDel_04","Está segur@ que quiere eliminar esta pregunta?");
-define("Get_Content_01","Registro fue cancelado!");
+define("Function_reallyDel_02","¿Está seguro de que quiere eliminar este tema?");
+define("Function_reallyDel_03","Si lo confirma, se eliminarán también todas las preguntas y respuestas.");
+define("Function_reallyDel_04","¿Está seguro que quiere eliminar esta pregunta?");
+define("Get_Content_01","¡Se canceló el registro!");
 define("Global_01","Debe iniciar su sesión para utilizar esta función");
-define("Global_02","regresar");
+define("Global_02","atrás");
 define("Global_03","correcto");
 define("Global_04","fecha");
 define("Global_05","Resultado");
-define("Global_06","ID");
+define("Global_06","Identificador");
 define("Global_07",'<h4 class="centered">No hay datos disponibles</h4>');
 define("Global_08","pregunta");
 define("Global_09","tema");
-define("Global_10","pos");
+define("Global_10","posición");
 define("Global_11","frecuencia");
 define("Global_12","tipo de pregunta");
 define("Global_13","Sí");
 define("Global_14","No");
 define("Global_15","respondido correctamente en %");
-define("Global_16","Actualmente no ha iniciado una sesión");
-define("Global_17","Inicio de sesión falló! Se requiere un certificado válido de CAcert.");
-define("Global_18","ID de pregunta");
-define("Global_19","Inicio de sesión falló");
+define("Global_16","Actualmente no ha iniciado sesión");
+define("Global_17","¡Falló el inicio de sesión! Se requiere un certificado válido de CAcert.");
+define("Global_18","Identificador de la pregunta");
+define("Global_19","Falló el inicio de sesión");
 define("Global_20","descripción");
-define("Index_01","registrado como :");
-define("Login_01","Su certificado no pudo ser validado.");
-define("Login_02","Su certificado ha sido revocado.");
+define("Index_01","ha iniciado sesión como :");
+define("Login_01","No se puedo validar su certificado.");
+define("Login_02","Se ha revocado su certificado.");
 define("Login_03_No_Org_Certs","No se aceptan certificados de organizaciones para los CATS ya que no pueden ser relacionados fácilmente con una cuenta de usuario.");
 define("Login_04_No_Server_Certs","Your certificate does not contain an Email field, you are probably using a server certificate.<br />".
                                   "Server certificates cannot be used to log in to CATS since they do not identify a person.");
@@ -146,41 +145,41 @@ define("Menue_02","Iniciar sesión");
 define("Menue_03","Salir");
 define("Menue_04","Progreso");
 define("Menue_05","Estadísticas");
-define("Menue_06","Examen");
+define("Menue_06","Pruebas");
 define("Menue_07","Temas");
 define("Menue_08","EN");
 define("Menue_09","DE");
 define("Statistic_01","mejor resultado para tema: ");
 define("Statistic_02","peor resultado para tema: ");
 define("Statistic_03","preguntas en este tema:");
-define("Statistic_04","pasó");
+define("Statistic_04","superó");
 define("Statistic_05","falló");
 define("Statistic_06","información de usuario");
 define("Statistic_07","Usuario");
 define("Statistic_08","usuarios registrados");
 define("Statistic_09","administradores");
 define("Statistic_10","certificados raíz");
-define("Statistic_11","certificado de usuario Clase I");
-define("Statistic_12","certificado de usuario Clase III");
+define("Statistic_11","certificado de usuario de clase I");
+define("Statistic_12","certificado de usuario de clase III");
 define("Statistic_13","configuración de idioma");
 define("Statistic_14","alemán");
 define("Statistic_15","inglés");
 define("Statistic_16","opción de envío ");
-define("Statistic_17","servicio postal");
+define("Statistic_17","correo postal");
 define("Statistic_18","correo electrónico");
 define("Statistic_19","ninguno");
-define("Statistic_20","información de examen");
+define("Statistic_20","información de la prueba");
 define("Statistic_21","fecha");
-define("Statistic_22","exámenes concluidos");
-define("Statistic_23","exámenes concluidos exitosamente");
+define("Statistic_22","pruebas completadas");
+define("Statistic_23","pruebas completadas con éxito");
 define("Statistic_24","francés");
 define("Title_01","temas CATS");
-define("Title_02","pregundas CATS coleccionadas");
+define("Title_02","preguntas CATS recogidas");
 define("Title_03","estadísticas CATS");
-define("Title_04","iniciar examen CATS");
+define("Title_04","iniciar prueba CATS");
 define("Title_05","progreso de aprendizaje CATS");
 define("Title_06","información de certificado CATS");
-define("Topic_01","Aviso: No puede declarar respuestas como correctas aquí, si las declaró como incorrectas anteriormente.");
-define("Topic_02","Indice de temas");
+define("Topic_01","Aviso: No puede declarar respuestas como correctas aquí si ya las declaró como incorrectas anteriormente.");
+define("Topic_02","Vista rápida de temas");
 define("Topic_03","preguntas sobre este tema:");
 ?>
